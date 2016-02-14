@@ -42,7 +42,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="produtos.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
+                    <a href="clientes.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
                 </li>
                 <li>
                     <a href="representantes.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
