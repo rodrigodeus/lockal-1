@@ -173,7 +173,69 @@ include_once "head.php";
                             <div class="panel-body">
 
                                 <table class="table">
-                                    <tr> sdfsdfsdfsdf</tr>
+
+                                   <tr>
+                                       <details>
+                                           <summary>Copyright 1999-2014.</summary>
+                                           <p> - by Refsnes Data. All Rights Reserved.</p>
+                                           <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+                                       </details>
+
+                                    </tr>
+
+                                    <tr>
+                                        <details>
+                                            <summary>Copyright 1999-2014.</summary>
+                                            <p> - by Refsnes Data. All Rights Reserved.</p>
+                                            <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+                                        </details>
+
+                                    </tr>
+
+                                    <tr>
+                                        <details>
+                                            <summary>
+                                                <Strong>Contrato: </Strong>1001
+                                                <Strong>Aquisição: </Strong>02/05/2015
+                                                <Strong>Veículo: </Strong>BMW X5 DME1345
+                                                <Strong>Parceiro: </Strong>Mota Auto Elétrico
+                                                <Strong>Status: </Strong>Ativo
+                                            </summary>
+                                            <div>
+                                                <row>
+
+
+
+                                                <table id="tbVendas" >
+                                                    <thead>
+                                                   <tr>
+                                                    <th>Vencimento</th>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                    <th>Data Pagamento</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                   </thead>
+                                                    <tbody>
+                                                <tr>
+                                                    <td>01/02/2015</td>
+                                                    <td>Rastreador XYZ parcela 1/3</td>
+                                                    <td>124,55</td>
+                                                    <td>02/03/2015</td>
+                                                    <td>Pago</td>
+                                                </tr>
+                                                    </tbody>
+
+                                                </row>
+                                            </div>
+
+
+
+
+
+                                        </details>
+
+                                    </tr>
                                 </table>
 
 
