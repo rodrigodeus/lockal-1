@@ -39,7 +39,7 @@ include_once "head.php";
                         <th>Parceiro</th>
                         <th>
 
-                            <div class='btn-group btn-group-xs' role='group'><a href='detalhe_representante.php?codigo=0' class='btn btn-primary'  title='Informações do produto'><span class='glyphicon glyphicon-plus'></span></a></div>
+                            <div class='btn-group btn-group-xs' role='group'><a href='detalhe_cliente.php?codigo=0' class='btn btn-primary'  title='Cadastrar novo cliente'><span class='glyphicon glyphicon-plus'></span></a></div>
 
                         </th>
                         </thead>
@@ -47,7 +47,7 @@ include_once "head.php";
 
                         <?php
 
-                        $sql = "SELECT codigo id, nome_razao,apelido_fantasia,cpf,fone1,fone2,
+                        $sql = "SELECT codigo id, nome_razao,apelido_fantasia,cpf_cnpj,tel_1,tel_2,
                               if(a.cod_parceiro=0,'Lockal',(select apelido_fantasia from parceiros a where codigo=a.cod_parceiro))parceiro,' ' icon from clientes a WHERE a.ativo='true'";
 
                         $bd->query($sql);
@@ -63,7 +63,7 @@ include_once "head.php";
 
 
                                     if($i+1==count($row)){
-                                        $td= "<div class='btn-group btn-group-xs' role='group'><a href='detalhe_representante.php?codigo=$row[0]' class='btn btn-info'  title='Informações do representantes'><span class='glyphicon glyphicon-info-sign'></span></a></div>";
+                                        $td= "<div class='btn-group btn-group-xs' role='group'><a href='detalhe_cliente.php?codigo=$row[0]' class='btn btn-info'  title='Informações do Cliente'><span class='glyphicon glyphicon-info-sign'></span></a></div>";
                                     }
 
                                     $out .= "<td>".$td."</td>";
