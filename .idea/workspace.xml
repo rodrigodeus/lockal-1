@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="892fbbb6-ab0c-41a9-94f9-a230b1e6268d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitattributes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/altera_descricao.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/conn.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/delete_aplicacao.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/delete_arquivo_pdf.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/lockal.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="lockal.iws" />
     <ignored path=".idea/workspace.xml" />
