@@ -26,7 +26,7 @@ include "head.php";
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6">
-                              <img src="../dist/img/logo.png"   alt='' width='300'px'>
+                              <img src=""   alt='' width='300'px'>
                             </div>
 
                         </div>
