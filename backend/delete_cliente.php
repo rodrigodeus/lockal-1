@@ -10,13 +10,10 @@ include_once "first_all.php";
 
 $bd = new BD();
 
-$bd->start_transaction();
-    $table = "veiculos";
-    $dados = array();
+    $table = "clientes";
     $dados['ativo'] =  "\"false\"";
     $where = "codigo=".$_GET['codigo'];
     $bd->update($table,$dados,$where);
-    $bd->record_log("log_login",'delete_veiculo',$_GET['codigo']);
-$bd->commit();
+    $bd->record_log("log_login",'delete_cliente',$_GET['codigo']);
 
-header('Location: ../pages/geral.php');
+header('Location: ../pages/clientes.php');
