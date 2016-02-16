@@ -172,71 +172,129 @@ include_once "head.php";
                             <div class="panel-heading">Contratações</div>
                             <div class="panel-body">
 
-                                <table class="table">
 
-                                   <tr>
-                                       <details>
-                                           <summary>Copyright 1999-2014.</summary>
-                                           <p> - by Refsnes Data. All Rights Reserved.</p>
-                                           <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
-                                       </details>
 
-                                    </tr>
 
-                                    <tr>
-                                        <details>
-                                            <summary>Copyright 1999-2014.</summary>
-                                            <p> - by Refsnes Data. All Rights Reserved.</p>
-                                            <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
-                                        </details>
 
-                                    </tr>
-
-                                    <tr>
-                                        <details>
-                                            <summary>
-                                                <Strong>Contrato: </Strong>1001
-                                                <Strong>Aquisição: </Strong>02/05/2015
-                                                <Strong>Veículo: </Strong>BMW X5 DME1345
-                                                <Strong>Parceiro: </Strong>Mota Auto Elétrico
-                                                <Strong>Status: </Strong>Ativo
-                                            </summary>
                                             <div>
-                                                <row>
+
+                                                <div class="accordion" id="accordion1">
+                                                    <div class="accordion-group">
+                                                        <div class="accordion-heading">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" style="text-decoration: none">
+                                                                <table class="table table-striped data_table" style="width:100%">
+                                                                    <tr>
+                                                                        <td><i class="fa fa-plus-square"></i></td>
+                                                                        <td><strong>Contrato:</strong>1001</td>
+                                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
+                                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
+                                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
+                                                                        <td><strong>Status: </strong>Ativo</td>
+
+                                                                    </tr>
+                                                                    </table>
+                                                            </a>
+                                                        </div>
+                                                        <div id="collapseOne" class="accordion-body collapse in">
+                                                            <div class="accordion-inner">
+                                                                <table class="table table-striped data_table" style="width:100%">
+
+                                                                    <tr>
+                                                                        <th><strong>Vencimento</strong></th>
+                                                                        <th><strong>Descrição</strong></th>
+                                                                        <th><strong>Valor</strong></th>
+                                                                        <th><strong>Data Pagamento</strong></th>
+                                                                        <th><strong>Status</strong></th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2015</td>
+                                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                                        <td>124,55</td>
+                                                                        <td>02/03/2015</td>
+                                                                        <td>Pago</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2015</td>
+                                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                                        <td>124,55</td>
+                                                                        <td>02/03/2015</td>
+                                                                        <td>Pago</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <hr>
 
 
 
-                                                <table id="tbVendas" >
-                                                    <thead>
-                                                   <tr>
-                                                    <th>Vencimento</th>
-                                                    <th>Descrição</th>
-                                                    <th>Valor</th>
-                                                    <th>Data Pagamento</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                                   </thead>
-                                                    <tbody>
-                                                <tr>
-                                                    <td>01/02/2015</td>
-                                                    <td>Rastreador XYZ parcela 1/3</td>
-                                                    <td>124,55</td>
-                                                    <td>02/03/2015</td>
-                                                    <td>Pago</td>
-                                                </tr>
-                                                    </tbody>
 
-                                                </row>
                                             </div>
 
+                                                <div class="accordion" id="accordion2">
+                                                    <div class="accordion-group">
+                                                        <div class="accordion-heading">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" style="text-decoration: none">
+                                                                <table class="table table-striped data_table" style="width:100%">
+                                                                    <tr>
+                                                                        <td><i class="fa fa-plus-square"></i></td>
+                                                                        <td><strong>Contrato:</strong>1001</td>
+                                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
+                                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
+                                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
+                                                                        <td><strong>Status: </strong>Ativo</td>
+
+                                                                    </tr>
+                                                                </table>
+                                                            </a>
+                                                        </div>
+                                                        <div id="collapseOne2" class="accordion-body collapse in">
+                                                            <div class="accordion-inner">
+                                                                <table class="table table-striped data_table" style="width:100%">
+
+                                                                    <tr>
+                                                                        <th><strong>Vencimento</strong></th>
+                                                                        <th><strong>Descrição</strong></th>
+                                                                        <th><strong>Valor</strong></th>
+                                                                        <th><strong>Data Pagamento</strong></th>
+                                                                        <th><strong>Status</strong></th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2015</td>
+                                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                                        <td>124,55</td>
+                                                                        <td>02/03/2015</td>
+                                                                        <td>Pago</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>01/02/2015</td>
+                                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                                        <td>124,55</td>
+                                                                        <td>02/03/2015</td>
+                                                                        <td>Pago</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <hr>
 
 
 
 
-                                        </details>
+                                                </div>
 
-                                    </tr>
-                                </table>
+
+
+
+
+
+
+
 
 
 
