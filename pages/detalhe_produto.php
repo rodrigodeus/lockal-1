@@ -15,7 +15,7 @@ $json = $bd->getResult("json");
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns="http://www.w3.org/1999/html">
+<html lang="pt-BR">
 
 <?php
 include_once "head.php";

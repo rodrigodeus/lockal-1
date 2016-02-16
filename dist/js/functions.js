@@ -427,10 +427,10 @@ function excluir_representante(id){
         location.href="../backend/delete_representante.php?codigo="+id;
     }
 }
-function excluir_veiculo(id){
-    var d = confirm("Tem certeza que deseja excluir esse veículo?");
+function excluir_cliente(id){
+    var d = confirm("Tem certeza que deseja excluir esse CLIENTE?");
     if(d){
-        location.href="../backend/delete_veiculo.php?codigo="+id;
+        location.href="../backend/delete_cliente.php?codigo="+id;
     }
 }
 function excluir_aplicacao(id){
