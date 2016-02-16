@@ -48,7 +48,7 @@
                     <a href="representantes.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
                 </li>
                 <li>
-                    <a href="geral.php"><i class="fa fa-cogs fa-fw"></i> Pré Venda</a>
+                    <a href="contratos.php"><i class="fa fa-cogs fa-fw"></i>Contratos</a>
                 </li>
 
                 <li>
