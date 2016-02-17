@@ -32,7 +32,7 @@
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
                     <div class="input-group custom-search-form" >
-                        <input type="text" class="form-control" placeholder="Busca produto..." id="pesquisa_1" onkeypress="enter_geral()">
+                        <input type="text" class="form-control" placeholder="Busca..." id="pesquisa_1" onkeypress="enter_geral()">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" onclick="pesquisageral()">
                                     <i class="fa fa-search"></i>
@@ -44,23 +44,43 @@
                 <li>
                     <a href="clientes.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
                 </li>
+<<<<<<< HEAD
                 <li>
                     <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
                 </li>
                 <li>
                     <a href="contratos.php"><i class="fa fa-cogs fa-fw"></i>Contratos</a>
                 </li>
+=======
+
+                    <?php
+                    if($_SESSION['admin']=='true'){
+                        echo "<li><a href='representantes.php'><i class='fa fa-users fa-fw'></i> Parceiros</a></li>";
+                    }
+                    ?>
+>>>>>>> e027458591b5181237cf59d47e61747bb2e011bf
 
                 <li>
-                    <a href="pesquisa.php"><i class="fa fa-search fa-fw" ></i> Pesquisa</a>
+                    <a href="contratos.php"><i class="fa fa-edit fa-fw"></i>Contratos</a>
                 </li>
+
                 <?php
                     if($_SESSION['admin']=='true'){
+                        echo "<li><a href='geral.php'><i class='fa fa-cogs fa-fw'></i> Configuração</a></li>";
                         echo "<li><a href='usuarios.php'><i class='fa fa-user fa-fw'></i> Usuários</a></li>";
                     }
                 ?>
 
-            </ul>
+                <li>
+                    <a href="#"><i class="fa fa-money fa-fw"></i>Financeiro<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href='#'>À Receber</a></li>
+                        <li><a href='#'>À Pagar</a></li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+
+</ul>
         </div>
         <!-- /.sidebar-collapse -->
     </div>

@@ -146,19 +146,7 @@ include_once "head.php";
                                 </div>
                                 <br>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <br>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-sm btn-primary pull-right">Salvar
-                                                </button>
-                                                <button type="button" onclick="excluir_cliente(<?=$_GET['codigo']?>)" class="btn btn-xs btn-danger">Excluir</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -184,6 +172,7 @@ include_once "head.php";
                                                             <td><strong>Veículo: </strong>BMW X5 DME1345</td>
                                                             <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
                                                             <td><strong>Status: </strong>Ativo</td>
+                                                            <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
 
                                                         </tr>
                                                         </table>
@@ -239,6 +228,7 @@ include_once "head.php";
                                                             <td><strong>Veículo: </strong>BMW X5 DME1345</td>
                                                             <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
                                                             <td><strong>Status: </strong>Ativo</td>
+                                                            <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
 
                                                         </tr>
                                                     </table>
@@ -279,7 +269,24 @@ include_once "head.php";
                     <p><a class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#modal_incluir" role="button">Adicionar Contrato</a></p>
                 </div>
 
+
+
             </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <button type="submit" class="btn btn-primary">Gerar Contrato</button>
+                                        <Br>
+                                        <br>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             <!-- /#page-wrapper -->
         </form>
 
@@ -359,48 +366,27 @@ include_once "head.php";
                                         <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
                                                value="<?= @$cpf_cnpj ?>">
                                     </div>
-                                </div>
+                                    </div>
 
                                 <div class="row">
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <label for="nome_razao">Renavam</label>
                                         <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
                                                value="<?= @$cpf_cnpj ?>">
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <label for="">Veículo</label>
-                                        <div id="div_veiculos">
-                                            <?php
-                                            $sql = "SELECT codigo,nome FROM veiculos";
-                                            echo $bd->SetComboSelect($sql,'slt_modelo','','form-control'," ","disabled required");
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label for="nome_razao">Ano</label>
-                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
-                                               value="<?= @$cpf_cnpj ?>">
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <label for="nome_razao">Modelo</label>
-                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
-                                               value="<?= @$cpf_cnpj ?>">
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <label for="nome_razao">Seguradora</label>
                                         <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
                                                value="<?= @$cpf_cnpj ?>">
                                     </div>
+                                </div>
+                                <HR>
+
+
+                                <div class="row">
+
 
                                     <div class="col-md-3">
                                         <label for="">Rastrador</label>
@@ -425,16 +411,19 @@ include_once "head.php";
                                         <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
                                                value="<?= @$cpf_cnpj ?>">
                                     </div>
-                              </div>
 
-
-                                <div class="row">
 
                                     <div class="col-md-3">
                                         <label for="nome_razao">Chip 1</label>
                                         <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
                                                value="<?= @$cpf_cnpj ?>">
                                     </div>
+
+
+                                </div>
+
+
+                                <div class="row">
 
 
 
@@ -446,7 +435,27 @@ include_once "head.php";
 
 
                                     <div class="col-md-3">
-                                        <label for="">Pagamento</label>
+                                        <label for="">Pagamento Instalação</label>
+                                        <div id="div_veiculos">
+                                            <?php
+                                            $sql = "SELECT codigo,nome FROM veiculos";
+                                            echo $bd->SetComboSelect($sql,'slt_modelo','','form-control'," ","disabled required");
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <label for="">Mensalidade</label>
+                                        <div id="div_veiculos">
+                                            <?php
+                                            $sql = "SELECT codigo,nome FROM veiculos";
+                                            echo $bd->SetComboSelect($sql,'slt_modelo','','form-control'," ","disabled required");
+                                            ?>
+                                        </div>
+                                    </div>
+                                          <div class="col-md-3">
+                                        <label for="">Vencimento</label>
                                         <div id="div_veiculos">
                                             <?php
                                             $sql = "SELECT codigo,nome FROM veiculos";
@@ -464,22 +473,6 @@ include_once "head.php";
                                 </div>
 
 
-
-                                <div class="row">
-
-                                    <div class="col-md-3">
-                                        <label for="nome_razao">Valor</label>
-                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
-                                               value="<?= @$cpf_cnpj ?>">
-                                    </div>
-
-
-
-                                    <div class="col-md-3">
-                                        <label for="nome_razao">Dia Vencimento</label>
-                                        <input type="text" id="cpf_cnpj" name="cpf_cnpj" class="form-control"
-                                               value="<?= @$cpf_cnpj ?>">
-                                    </div>
 
                                  </div>
                                 <br>
