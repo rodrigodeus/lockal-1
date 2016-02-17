@@ -186,6 +186,7 @@ include_once "head.php";
                                                                         <td><strong>Veículo: </strong>BMW X5 DME1345</td>
                                                                         <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
                                                                         <td><strong>Status: </strong>Ativo</td>
+                                                                        <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
 
                                                                     </tr>
                                                                     </table>
@@ -241,6 +242,7 @@ include_once "head.php";
                                                                         <td><strong>Veículo: </strong>BMW X5 DME1345</td>
                                                                         <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
                                                                         <td><strong>Status: </strong>Ativo</td>
+                                                                        <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
 
                                                                     </tr>
                                                                 </table>
