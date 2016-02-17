@@ -3,7 +3,7 @@ require_once "../backend/first_all.php";
 
 $bd = new BD();
 
-$sql = "SELECT a.*,b.apelido_fantasia parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
+$sql = "SELECT a.*,b.apelido_fantasia nome_parceiro, b.codigo cod_parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
 $bd->query($sql);
 $resposta = $bd->getResult("array");
 
@@ -66,6 +66,16 @@ include_once "head.php";
                                         <label for="rg_insc_est">RG/Insc. Estadual</label>
                                         <input type="text" id="rg_insc_est" name="rg_insc_est" class="form-control"
                                                value="<?= @$rg_insc_est ?>">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="rg_insc_est">Parceiro ID</label>
+                                        <input type="text" id="" name="" class="form-control" disabled
+                                               value="<?= @$cod_parceiro ?>">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="rg_insc_est">Parceiro Nome</label>
+                                        <input type="text" id="" name="" class="form-control" disabled
+                                               value="<?= @$nome_parceiro ?>">
                                     </div>
                                 </div>
                                 <br>

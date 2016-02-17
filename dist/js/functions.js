@@ -433,6 +433,12 @@ function excluir_cliente(id){
         location.href="../backend/delete_cliente.php?codigo="+id;
     }
 }
+function excluir_parceiro(id){
+    var d = confirm("Tem certeza que deseja excluir esse PARCEIRO?");
+    if(d){
+        location.href="../backend/delete_parceiro.php?codigo="+id;
+    }
+}
 function excluir_aplicacao(id){
     var d = confirm("Tem certeza que deseja excluir essa aplicação?");
     if(d){
@@ -494,7 +500,7 @@ function meu_mapa(){
 }
 
 
-if(location.pathname =="/tury/admin/pages/detalhe_representante.php"){
+if(location.pathname =="/tury/admin/pages/detalhe_parceiro.php"){
    meu_mapa();
 }
 

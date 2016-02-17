@@ -89,6 +89,6 @@ if (isset($_POST) && $_POST != "") {
     }
     $bd->record_log("log_login",'update_representante',$_POST['id']);
     $bd->commit();
-    header('Location: ../pages/representantes.php');
+    header('Location: ../pages/parceiros.php');
 }
 

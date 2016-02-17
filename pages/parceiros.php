@@ -24,31 +24,27 @@ include_once "head.php";
         <div class="row">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Reprensentantes
+                    Parceiro
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <table class="table table-striped data_table">
                         <thead>
                         <th>id</th>
-                        <th>Nome Fantasia</th>
-                        <th>Razão Social</th>
-                        <th>Cidade</th>
-                        <th>UF</th>
-                        <th>Fones</th>
-                        <th>Linha</th>
+                        <th>Nome/Razão</th>
+                        <th>Apelido/Fantasia</th>
+                        <th>CPF</th>
+                        <th>Fone 1</th>
+                        <th>Fone 2</th>
                         <th>
-
-                            <div class='btn-group btn-group-xs' role='group'><a href='detalhe_representante.php?codigo=0' class='btn btn-primary'  title='Informações do produto'><span class='glyphicon glyphicon-plus'></span></a></div>
-
+                            <div class='btn-group btn-group-xs' role='group'><a href='detalhe_parceiro.php?codigo=0' class='btn btn-primary'  title='Cadastrar novo cliente'><span class='glyphicon glyphicon-plus'></span></a></div>
                         </th>
                         </thead>
                         <tbody>
 
                         <?php
 
-                        $sql = "SELECT codigo,fantasia,razao,cidade,uf,concat(fone1,' ',fone2)fones,
-                              if(a.linha=0,'Todas',(select descricao from linhas where codigo=a.linha))linha,' ' icon from representantes a WHERE a.ativo='true'";
+                        $sql = "SELECT codigo,nome_razao,apelido_fantasia,cpf_cnpj,tel_1,tel_2 FROM parceiros a WHERE a.ativo='true'";
 
                         $bd->query($sql);
                         $resposta =  $bd->getResult();
@@ -56,18 +52,11 @@ include_once "head.php";
                             $out = "";
                             while ($row = mysql_fetch_row($resposta)) {
                                 $out .= "<tr>";
-
                                 for( $i=0; $i<count($row);$i++){
-
                                     $td = $row[$i];
-
-
-                                    if($i+1==count($row)){
-                                        $td= "<div class='btn-group btn-group-xs' role='group'><a href='detalhe_representante.php?codigo=$row[0]' class='btn btn-info'  title='Informações do representantes'><span class='glyphicon glyphicon-info-sign'></span></a></div>";
-                                    }
-
                                     $out .= "<td>".$td."</td>";
                                 }
+                                $out .= "<td><div class='btn-group btn-group-xs' role='group'><a href='detalhe_parceiro.php?codigo=$row[0]' class='btn btn-info'  title='Informações do Cliente'><span class='glyphicon glyphicon-info-sign'></span></a></div></td>";
                                 $out .= "</tr>";
                             };
                             echo $out;

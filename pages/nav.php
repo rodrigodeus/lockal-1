@@ -45,7 +45,7 @@
                     <a href="clientes.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
                 </li>
                 <li>
-                    <a href="representantes.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
+                    <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
                 </li>
                 <li>
                     <a href="contratos.php"><i class="fa fa-cogs fa-fw"></i>Contratos</a>

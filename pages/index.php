@@ -65,7 +65,7 @@ $bd = new BD();
                                 </div>
                             </div>
                         </div>
-                        <a href="representantes.php">
+                        <a href="parceiros.php">
                             <div class="panel-footer">
                                 <span class="pull-left">Representantes</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
