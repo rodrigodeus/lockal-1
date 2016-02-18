@@ -44,26 +44,11 @@
                 <li>
                     <a href="clientes.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
                 </li>
-<<<<<<< HEAD
                 <li>
                     <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
                 </li>
                 <li>
                     <a href="contratos.php"><i class="fa fa-cogs fa-fw"></i>Contratos</a>
-                </li>
-=======
-
-                    <?php
-                    if($_SESSION['admin']=='true'){
-                        echo "<li><a href='representantes.php'><i class='fa fa-users fa-fw'></i> Parceiros</a></li>";
-                    }
-                    ?>
->>>>>>> e027458591b5181237cf59d47e61747bb2e011bf
-
-                <li>
-                    <a href="contratos.php"><i class="fa fa-edit fa-fw"></i>Contratos</a>
-                </li>
-
                 <?php
                     if($_SESSION['admin']=='true'){
                         echo "<li><a href='geral.php'><i class='fa fa-cogs fa-fw'></i> Configuração</a></li>";

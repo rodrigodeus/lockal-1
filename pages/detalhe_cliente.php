@@ -320,6 +320,7 @@ include_once "head.php";
     </div>
     <!-- /#wrapper -->
 
+
     <?php
     include_once "scripts.php";
     ?>

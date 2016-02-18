@@ -72,7 +72,7 @@ include_once "head.php";
 
 
                                     if($i+1==count($row)){
-                                        $td= "<div class='btn-group btn-group-xs' role='group'><a href='detalhe_cliente.php?codigo=$row[0]' class='btn btn-info'  title='Informações do Cliente'><span class='glyphicon glyphicon-info-sign'></span></a></div>";
+                                        $td= "<div class='btn-group btn-group-xs' role='group'><a href='detalhe_contrato.php?codigo=$row[0]' class='btn btn-info'  title='Informações do Cliente'><span class='glyphicon glyphicon-info-sign'></span></a></div>";
                                     }
 
                                     $out .= "<td>".$td."</td>";
