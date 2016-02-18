@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="892fbbb6-ab0c-41a9-94f9-a230b1e6268d" name="Default" comment="parceiros">
+    <list default="true" id="892fbbb6-ab0c-41a9-94f9-a230b1e6268d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="c1ac64ce-53b4-47dd-88b3-3191f4edf486" name="Rejected commit: Default" comment="Rejected commit: Default" />
@@ -506,7 +506,13 @@
       <option name="project" value="LOCAL" />
       <updated>1455673794427</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="parceiros">
+      <created>1455763515570</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1455763515570</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
