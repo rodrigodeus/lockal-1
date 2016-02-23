@@ -5,8 +5,19 @@
  * Date: 18/01/2016
  * Time: 12:10
  */
-include_once "../backend/first_all.php";
+include "../backend/conn.php";
 
-$bd = new BD();
-$sql = "SELECT a.* FROM produtos a JOIN geral b ON b.cod=a.codigo WHERE MATCH (a.nome_produto,b.nome, a.detalhamento) AGAINST ('\"ford vidros\"+\"ford\"+\"vidros\"' IN BOOLEAN MODE) group by b.cod";
-header('Location: ../index.php');
+$v = file_get_contents("http://fipeapi.appspot.com/api/1/carros/marcas.json");
+$v = json_decode($v);
+foreach($v as $k){
+    echo "<pre>";
+    print_r($k);
+    echo "</pre>";
+    $sql = "INSERT INTO marcas (codigo,name) VALUES (".$k->id.",'".$k->fipe_name."')";
+    $bd = new BD();
+    $dados['codigo'] = $k->id;
+    $dados['nome'] = $k->fipe_name;
+    $table = "marcas";
+    $bd->insert($table,$dados);
+}
+

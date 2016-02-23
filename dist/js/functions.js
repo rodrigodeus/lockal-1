@@ -491,30 +491,50 @@ if (location.pathname == "/tury/admin/pages/detalhe_parceiro.php") {
     meu_mapa();
 }
 
-$("#fabricante").on('change', function () {
-    alert();
-});
 
 function fn_pesquisa_cliente() {
+
+    $("#modalLoading").modal("show");
+
     var ipt_pesquisa_cliente = document.getElementById('ipt_pesquisa_cliente');
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var json = JSON.parse(xmlhttp.responseText);
-            console.log(xmlhttp.responseText);
-            console.log(json.length);
             var str = "<div class='list-group'>";
             for (var i = 0; i < json.length; i++) {
-                str += "<button type='button' class='list-group-item'><b>" + json[i].nome_razao + "</b> - " +  json[i].cpf_cnpj + "</button>";
+                str += "<button type='button' class='list-group-item cliente_selected' data-codigo='"+json[i].codigo+"'><b>" + json[i].nome_razao + "</b> - " + json[i].cpf_cnpj + "</button>";
             }
             str += "</div>";
             $('#myModal').find('.modal-body').html(str);
+            $("#modalLoading").modal("hide");
             $('#myModal').modal('show');
 
-        }
+        };
     };
     xmlhttp.open("GET", "../backend/pesquisa_cliente.php?p=" + ipt_pesquisa_cliente.value, true);
     xmlhttp.send();
-
 }
+$("#fabricante").on('change',function(){
+    $("#modalLoading").modal("show");
+    $.ajax({
+        type: "get",
+        url: "../backend/select_modelo.php?cod_fabricante="+this.value,
+        success: function(result){
+            $("#slt_veiculos").html(result);
+            $("#modalLoading").modal("hide");
+    }});
+});
 
+$(".cliente_selected").on('click',function(){
+    $("#modalLoading").modal("show");
+    console.log(this.getAttribute('data-codigo'));
+    $.ajax({
+        type: "get",
+        url: "../backend/select_cliente.php?codigo="+this.getAttribute('data-codigo'),
+        success: function(result){
+            //$("#slt_veiculos").html(result);
+            console.log(result);
+            $("#modalLoading").modal("hide");
+        }});
+});

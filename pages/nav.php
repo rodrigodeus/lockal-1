@@ -48,7 +48,7 @@
                     <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
                 </li>
                 <li>
-                    <a href="contratos.php"><i class="fa fa-cogs fa-fw"></i>Contratos</a>
+                    <a href="contratos.php"><i class="fa fa-file-text-o fa-fw"></i> Contratos</a>
                 <?php
                     if($_SESSION['admin']=='true'){
                         echo "<li><a href='geral.php'><i class='fa fa-cogs fa-fw'></i> Configuração</a></li>";
@@ -57,7 +57,7 @@
                 ?>
 
                 <li>
-                    <a href="#"><i class="fa fa-money fa-fw"></i>Financeiro<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-money fa-fw"></i> Financeiro<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href='#'>À Receber</a></li>
                         <li><a href='#'>À Pagar</a></li>

@@ -10,5 +10,5 @@ include_once "first_all.php";
 
 $bd = new BD();
 
-$sql = "SELECT 0 codigo,'Todos' nome UNION ALL SELECT codigo,nome FROM veiculos WHERE cod_fabricante={$_GET['cod_fabricante']}";
-echo $bd->SetComboSelect($sql,'slt_modelo','','form-control');
+$sql = "SELECT codigo,nome FROM veiculos WHERE cod_fabricante={$_GET['cod_fabricante']}";
+echo $bd->SetComboSelect($sql,'cod_veiculo','','form-control');
