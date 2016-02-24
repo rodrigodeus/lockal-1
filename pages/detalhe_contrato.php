@@ -83,7 +83,7 @@ include_once "head.php";
                                     <!-- /.col-lg-6 -->
                                     <div class="col-lg-2">
                                         <label for="">Cadastrar Cliente</label><br>
-                                        <a href="detalhe_cliente.php?codigo=0" class="btn btn-primary btn-group-justified">Cadastrar</a>
+                                        <a href="detalhe_cliente.php?codigo=0&r=1" class="btn btn-primary btn-group-justified">Cadastrar</a>
                                     </div>
                                 </div>
                                 <br>
@@ -125,13 +125,13 @@ include_once "head.php";
                                                        value="<?= @$rg_insc_est ?>">
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="rg_insc_est">Parceiro ID</label>
-                                                <input disabled type="text" id="" name="" class="form-control" disabled
+                                                <label for="cod_parceiro">Parceiro ID</label>
+                                                <input disabled type="text" id="cod_parceiro" name="cod_parceiro" class="form-control" disabled
                                                        value="<?= @$cod_parceiro ?>">
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="rg_insc_est">Parceiro Nome</label>
-                                                <input disabled type="text" id="" name="" class="form-control" disabled
+                                                <label for="nome_parceiro">Parceiro Nome</label>
+                                                <input disabled type="text" id="nome_parceiro" name="" class="form-control" disabled
                                                        value="<?= @$nome_parceiro ?>">
                                             </div>
                                         </div>
@@ -198,15 +198,15 @@ include_once "head.php";
 
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="">Fone 1</label>
-                                                <input disabled type="text" id="fone1" name="tel_1" class="form-control"
+                                                <label for="tel_1">Fone 1</label>
+                                                <input disabled type="text" id="tel_1" name="tel_1" class="form-control"
                                                        value="<?= @$tel_1 ?>">
 
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label for="">Fone 2</label>
-                                                <input disabled type="text" id="fone2" name="tel_2" class="form-control"
+                                                <label for="tel_2">Fone 2</label>
+                                                <input disabled type="text" id="tel_2" name="tel_2" class="form-control"
                                                        value="<?= @$tel_2 ?>">
                                             </div>
                                             <div class="col-md-4">

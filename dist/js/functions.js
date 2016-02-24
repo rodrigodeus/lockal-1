@@ -39,7 +39,7 @@ $('.data_table_off').DataTable({
     ordering: false
 });
 
-
+/*
 function pesquisa() {
 
     var edtp = document.getElementById("pesquisa").value;
@@ -59,7 +59,7 @@ function pesquisa() {
 
 
 }
-
+*/
 
 function pesquisageral() {
 
@@ -72,7 +72,7 @@ function pesquisageral() {
 
 }
 
-
+/*
 function enter_geral() {
     if (event.keyCode == 13) {
         pesquisageral()
@@ -84,9 +84,10 @@ function enter() {
     }
 }
 
+
 document.onkeydown = enter;
 
-
+*/
 function buscar_cep(n) {
     var endereco = document.getElementById("endereco");
     var bairro = document.getElementById("bairro");
@@ -503,7 +504,7 @@ function fn_pesquisa_cliente() {
             var json = JSON.parse(xmlhttp.responseText);
             var str = "<div class='list-group'>";
             for (var i = 0; i < json.length; i++) {
-                str += "<button type='button' class='list-group-item cliente_selected' data-codigo='"+json[i].codigo+"'><b>" + json[i].nome_razao + "</b> - " + json[i].cpf_cnpj + "</button>";
+                str += "<button id='cliente_selected' type='button' class='list-group-item' data-codigo='"+json[i].codigo+"'>" + json[i].nome_razao + " - " + json[i].cpf_cnpj + "</button>";
             }
             str += "</div>";
             $('#myModal').find('.modal-body').html(str);
@@ -515,26 +516,48 @@ function fn_pesquisa_cliente() {
     xmlhttp.open("GET", "../backend/pesquisa_cliente.php?p=" + ipt_pesquisa_cliente.value, true);
     xmlhttp.send();
 }
-$("#fabricante").on('change',function(){
-    $("#modalLoading").modal("show");
-    $.ajax({
-        type: "get",
-        url: "../backend/select_modelo.php?cod_fabricante="+this.value,
-        success: function(result){
-            $("#slt_veiculos").html(result);
-            $("#modalLoading").modal("hide");
-    }});
-});
+$(document).ready(function(){
+    $("#fabricante").on('change',function(){
+        $("#modalLoading").modal("show");
+        $.ajax({
+            type: "get",
+            url: "../backend/select_modelo.php?cod_fabricante="+this.value,
+            success: function(result){
+                $("#slt_veiculos").html(result);
+                $("#modalLoading").modal("hide");
+            }});
+    });
 
-$(".cliente_selected").on('click',function(){
-    $("#modalLoading").modal("show");
-    console.log(this.getAttribute('data-codigo'));
-    $.ajax({
-        type: "get",
-        url: "../backend/select_cliente.php?codigo="+this.getAttribute('data-codigo'),
-        success: function(result){
-            //$("#slt_veiculos").html(result);
-            console.log(result);
-            $("#modalLoading").modal("hide");
-        }});
+    $("#myModal").on('click',function(ev){
+        var cod_cliente = ev.target.getAttribute('data-codigo');
+
+        if(cod_cliente) {
+
+            $("#myModal").modal("hide");
+            $("#modalLoading").modal("show");
+            $.ajax({
+                type: "get",
+                url: "../backend/select_cliente.php?codigo=" + cod_cliente,
+                success: function (result) {
+                    //$("#slt_veiculos").html(result);
+                    console.log(result);
+                    var json = JSON.parse(result);
+                    console.log(json);
+                    for(var x in json[0]){
+                        console.log(json[0][x]);
+                        if(document.getElementById(x)){
+                            document.getElementById(x).value = json[0][x];
+                            //console.log(json[0][x]);
+                        }
+                    }
+                    $("#modalLoading").modal("hide");
+                }
+            });
+        }
+    });
+    $( "#ipt_pesquisa_cliente" ).keypress(function(ev) {
+        if(ev.charCode == 13) {
+            fn_pesquisa_cliente();
+        }
+    });
 });

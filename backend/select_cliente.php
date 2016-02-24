@@ -10,6 +10,6 @@ require_once "../backend/first_all.php";
 
 $bd = new BD();
 
-$sql = "SELECT a.*,b.apelido_fantasia nome_parceiro, b.codigo cod_parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
+$sql = "SELECT a.*,a.codigo cod_cliente, b.apelido_fantasia nome_parceiro, b.codigo cod_parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
 $bd->query($sql);
 echo $bd->getResult("json");

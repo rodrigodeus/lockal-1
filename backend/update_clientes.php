@@ -28,6 +28,11 @@ if(isset($_POST) && $_POST !=""){
             $bd->update($table,$dados,$where);
             $bd->record_log("log_login",'update_clientes',$_POST['id']);
 
-        header('Location: ../pages/clientes.php');
+        if(isset($_GET['r'])){
+            header('Location: ../pages/detalhe_contrato.php?codigo='.$_POST['id']);
+        }else{
+            header('Location: ../pages/clientes.php');
+        }
+
 }
 

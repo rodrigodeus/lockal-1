@@ -27,7 +27,15 @@ include_once "head.php";
     include_once "nav.php";
     ?>
     <div id="page-wrapper">
-        <form action="../backend/update_clientes.php" method="post" enctype="multipart/form-data">
+        <?php
+        if(isset($_GET['r'])){
+            $action = "../backend/update_clientes.php?r=1";
+        }else{
+            $action = "../backend/update_clientes.php";
+        }
+
+        ?>
+        <form action=<?=$action?> method="post" enctype="multipart/form-data">
             <br>
             <!--Representantes-->
             <div class="row">
