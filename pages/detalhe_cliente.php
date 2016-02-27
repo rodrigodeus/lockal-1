@@ -7,7 +7,7 @@ $sql = "SELECT a.*,b.apelido_fantasia nome_parceiro, b.codigo cod_parceiro FROM 
 $bd->query($sql);
 $resposta = $bd->getResult("array");
 
-if($resposta) {
+if ($resposta) {
     extract($resposta[0]);
 }
 ?>
@@ -28,28 +28,27 @@ include_once "head.php";
     ?>
     <div id="page-wrapper">
         <?php
-        if(isset($_GET['r'])){
+        if (isset($_GET['r'])) {
             $action = "../backend/update_clientes.php?r=1";
-        }else{
+        } else {
             $action = "../backend/update_clientes.php";
         }
 
         ?>
-        <form action=<?=$action?> method="post" enctype="multipart/form-data">
+        <form action=<?= $action ?> method="post" enctype="multipart/form-data">
             <br>
-            <!--Representantes-->
+            <!--Clientes-->
             <div class="row">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Clientes</div>
+                    <div class="panel-heading">Cliente</div>
                     <div class="panel-body">
                         <div class="row">
-
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label for="id">Id</label>
                                         <input type="text" id="id" name="id" readonly class="form-control"
-                                               value="<?=$_GET['codigo']?>">
+                                               value="<?= $_GET['codigo'] ?>">
                                     </div>
                                     <div class="col-md-5">
                                         <label for="nome_razao">Nome / Razão Social</label>
@@ -58,7 +57,8 @@ include_once "head.php";
                                     </div>
                                     <div class="col-md-5">
                                         <label for="apelido_fantasia">Apelido/ Nome Fantasia</label>
-                                        <input type="text" id="apelido_fantasia" name="apelido_fantasia" class="form-control"
+                                        <input type="text" id="apelido_fantasia" name="apelido_fantasia"
+                                               class="form-control"
                                                value="<?= @$apelido_fantasia ?>">
                                     </div>
                                 </div>
@@ -87,6 +87,7 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="">CEP</label>
@@ -113,6 +114,7 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="bairro">Bairro</label>
@@ -138,6 +140,7 @@ include_once "head.php";
 
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Fone 1</label>
@@ -156,182 +159,208 @@ include_once "head.php";
                                         <input class="form-control" placeholder="E-mail" name="email" id="email"
                                                type="email" value="<?= @$email ?>">
                                     </div>
-
-
                                 </div>
                                 <br>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <br>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-lg btn-primary pull-right">Salvar
-                                                </button>
-                                                <button type="button" onclick="excluir_cliente(<?=$_GET['codigo']?>)" class="btn btn-xs btn-danger">Excluir</button>
-                                            </div>
-                                        </div>
+                                        <label for="obs">Observações</label>
+                                        <textarea type="text" id="obs" name="obs" class="form-control"
+                                                  value="<?= @$obs ?>" rows="5"></textarea>
+
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Contato-->
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Contato para caso de Emergência</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="contato_nome">Nome</label>
+                                        <input type="text" id="contato_nome" name="contato_nome" class="form-control"
+                                               value="<?= @$contato_nome ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="contato_parentesco">Relação</label>
+                                        <input type="text" id="contato_parentesco" name="contato_parentesco"
+                                               class="form-control"
+                                               value="<?= @$contato_parentesco ?>"
+                                               placeholder="pai,mão,irmão,vizinho...">
+                                    </div>
+
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="contato_tel_1">Fone 1</label>
+                                        <input type="text" id="contato_tel_1" name="contato_tel_1" class="form-control"
+                                               value="<?= @$contato_tel_1 ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="contato_tel_2">Fone 2</label>
+                                        <input type="text" id="contato_tel_2" name="contato_tel_2" class="form-control"
+                                               value="<?= @$contato_tel_2 ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="contato_email">Email </label>
+                                        <input class="form-control" placeholder="E-mail" name="contato_email"
+                                               id="contato_email"
+                                               type="email" value="<?= @$contato_email ?>">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!--localizaçãp-->
+            <!--Botoes-->
+            <div class="row">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Contratações</div>
-                            <div class="panel-body">
-
-
-
-
-
-                                            <div>
-
-                                                <div class="accordion" id="accordion1">
-                                                    <div class="accordion-group">
-                                                        <div class="accordion-heading">
-                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" style="text-decoration: none">
-                                                                <table class="table table-striped data_table" style="width:100%">
-                                                                    <tr>
-                                                                        <td><i class="fa fa-plus-square"></i></td>
-                                                                        <td><strong>Contrato:</strong>1001</td>
-                                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
-                                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
-                                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
-                                                                        <td><strong>Status: </strong>Ativo</td>
-                                                                        <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
-
-                                                                    </tr>
-                                                                    </table>
-                                                            </a>
-                                                        </div>
-                                                        <div id="collapseOne" class="accordion-body collapse in">
-                                                            <div class="accordion-inner">
-                                                                <table class="table table-striped data_table" style="width:100%">
-
-                                                                    <tr>
-                                                                        <th><strong>Vencimento</strong></th>
-                                                                        <th><strong>Descrição</strong></th>
-                                                                        <th><strong>Valor</strong></th>
-                                                                        <th><strong>Data Pagamento</strong></th>
-                                                                        <th><strong>Status</strong></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2015</td>
-                                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                                        <td>124,55</td>
-                                                                        <td>02/03/2015</td>
-                                                                        <td>Pago</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2015</td>
-                                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                                        <td>124,55</td>
-                                                                        <td>02/03/2015</td>
-                                                                        <td>Pago</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <hr>
-
-
-
-
-                                            </div>
-
-                                                <div class="accordion" id="accordion2">
-                                                    <div class="accordion-group">
-                                                        <div class="accordion-heading">
-                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" style="text-decoration: none">
-                                                                <table class="table table-striped data_table" style="width:100%">
-                                                                    <tr>
-                                                                        <td><i class="fa fa-plus-square"></i></td>
-                                                                        <td><strong>Contrato:</strong>1001</td>
-                                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
-                                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
-                                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
-                                                                        <td><strong>Status: </strong>Ativo</td>
-                                                                        <td>  <i class="fa fa-print" title="Imprimir dados deste contrato"></i>
-
-                                                                    </tr>
-                                                                </table>
-                                                            </a>
-                                                        </div>
-                                                        <div id="collapseOne2" class="accordion-body collapse in">
-                                                            <div class="accordion-inner">
-                                                                <table class="table table-striped data_table" style="width:100%">
-
-                                                                    <tr>
-                                                                        <th><strong>Vencimento</strong></th>
-                                                                        <th><strong>Descrição</strong></th>
-                                                                        <th><strong>Valor</strong></th>
-                                                                        <th><strong>Data Pagamento</strong></th>
-                                                                        <th><strong>Status</strong></th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2015</td>
-                                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                                        <td>124,55</td>
-                                                                        <td>02/03/2015</td>
-                                                                        <td>Pago</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>01/02/2015</td>
-                                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                                        <td>124,55</td>
-                                                                        <td>02/03/2015</td>
-                                                                        <td>Pago</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <hr>
-
-
-
-
-                                                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-lg btn-primary pull-right">Salvar
+                        </button>
+                        <button type="button" onclick="excluir_cliente(<?= $_GET['codigo'] ?>)"
+                                class="btn btn-xs btn-danger">Excluir
+                        </button>
                     </div>
                 </div>
-                <!--/localizaçao-->
-
-
             </div>
-            <!-- /#page-wrapper -->
-        </form>
-    </div>
-    <!-- /#wrapper -->
+            <br>
+            <!--localizaçãp-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Contratações</div>
+                        <div class="panel-body">
+                            <div>
+                                <div class="accordion" id="accordion1">
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse"
+                                               data-parent="#accordion1" href="#collapseOne"
+                                               style="text-decoration: none">
+                                                <table class="table table-striped data_table" style="width:100%">
+                                                    <tr>
+                                                        <td><i class="fa fa-plus-square"></i></td>
+                                                        <td><strong>Contrato:</strong>1001</td>
+                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
+                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
+                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
+                                                        <td><strong>Status: </strong>Ativo</td>
+                                                        <td><i class="fa fa-print"
+                                                               title="Imprimir dados deste contrato"></i>
+
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                        </div>
+                                        <div id="collapseOne" class="accordion-body collapse in">
+                                            <div class="accordion-inner">
+                                                <table class="table table-striped data_table" style="width:100%">
+
+                                                    <tr>
+                                                        <th><strong>Vencimento</strong></th>
+                                                        <th><strong>Descrição</strong></th>
+                                                        <th><strong>Valor</strong></th>
+                                                        <th><strong>Data Pagamento</strong></th>
+                                                        <th><strong>Status</strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01/02/2015</td>
+                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                        <td>124,55</td>
+                                                        <td>02/03/2015</td>
+                                                        <td>Pago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01/02/2015</td>
+                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                        <td>124,55</td>
+                                                        <td>02/03/2015</td>
+                                                        <td>Pago</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion" id="accordion2">
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <a class="accordion-toggle" data-toggle="collapse"
+                                               data-parent="#accordion2" href="#collapseOne2"
+                                               style="text-decoration: none">
+                                                <table class="table table-striped data_table" style="width:100%">
+                                                    <tr>
+                                                        <td><i class="fa fa-plus-square"></i></td>
+                                                        <td><strong>Contrato:</strong>1001</td>
+                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
+                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
+                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
+                                                        <td><strong>Status: </strong>Ativo</td>
+                                                        <td><i class="fa fa-print"
+                                                               title="Imprimir dados deste contrato"></i>
+
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                        </div>
+                                        <div id="collapseOne2" class="accordion-body collapse in">
+                                            <div class="accordion-inner">
+                                                <table class="table table-striped data_table" style="width:100%">
+
+                                                    <tr>
+                                                        <th><strong>Vencimento</strong></th>
+                                                        <th><strong>Descrição</strong></th>
+                                                        <th><strong>Valor</strong></th>
+                                                        <th><strong>Data Pagamento</strong></th>
+                                                        <th><strong>Status</strong></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01/02/2015</td>
+                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                        <td>124,55</td>
+                                                        <td>02/03/2015</td>
+                                                        <td>Pago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01/02/2015</td>
+                                                        <td>Rastreador XYZ parcela 1/3</td>
+                                                        <td>124,55</td>
+                                                        <td>02/03/2015</td>
+                                                        <td>Pago</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<!-- /#wrapper -->
 
 
-    <?php
-    include_once "scripts.php";
-    ?>
+<?php
+include_once "scripts.php";
+?>
 
 
 </body>

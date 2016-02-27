@@ -42,12 +42,12 @@ include_once "head.php";
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Data da Instalação</label>
                                         <input type="date" id="data_instalacao" name="data_instalacao"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="<?=date('Y-m-d');?>" required>
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Vencimento do Contrato</label>
                                         <input type="date" id="data_vencimento" name="data_vencimento"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="<?=date('Y-m-d', strtotime("+1 year"))?>" required>
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Cód. Cliente Power</label>
@@ -290,6 +290,57 @@ include_once "head.php";
                         </div>
                     </div>
 
+                    <!--Rastreador-->
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Dados do Rastreador
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="">Fabricante</label>
+                                        <?php
+                                        $consulta = "SELECT codigo,fabricante FROM rastreadores ORDER BY fabricante";
+                                        $nome = "";
+                                        $itemPadrao = "";
+                                        $css = "form-control";
+                                        echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
+                                        ?>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="imei">IMEI</label>
+                                        <input type="text" id="imei" name="imei" class="form-control">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="serial">Serial</label>
+                                        <input type="text" id="serial" name="serial"
+                                               class="form-control" value="" required>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="">Modelo</label>
+                                        <div id="slt_rastreador">
+                                            <select name="cod_rastreador" id="cod_veiculo" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="chip_1">Chip 1</label>
+                                        <input type="text" id="chip_1" name="chip_1" class="form-control">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="chip_2">Chip 2</label>
+                                        <input type="text" id="chip_2" name="chip_2"
+                                               class="form-control" value="" required>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
