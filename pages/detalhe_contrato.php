@@ -136,7 +136,7 @@ include_once "head.php";
                                             </div>
                                         </div>
                                         <br>
-
+                                        <!--
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label for="">CEP</label>
@@ -216,6 +216,7 @@ include_once "head.php";
                                                        type="email" value="<?= @$email ?>">
                                             </div>
                                         </div>
+                                        -->
                                         <br>
                                     </div>
                                 </div>
@@ -324,7 +325,13 @@ include_once "head.php";
                                     <div class="col-md-6">
                                         <label for="">Modelo</label>
                                         <div id="slt_rastreador">
-                                            <select name="cod_rastreador" id="cod_veiculo" class="form-control"></select>
+                                            <?php
+                                            $consulta = "SELECT codigo,modelo FROM rastreadores ORDER BY fabricante";
+                                            $nome = "cod_rastreador";
+                                            $itemPadrao = "";
+                                            $css = "form-control";
+                                            echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -335,6 +342,63 @@ include_once "head.php";
                                         <label for="chip_2">Chip 2</label>
                                         <input type="text" id="chip_2" name="chip_2"
                                                class="form-control" value="" required>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Equipamento e Instalação-->
+                    <div class="row" id="eq_instal">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Equipamento e Instalação
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label for="fp_dinheiro">Dinheiro</label>
+                                        <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control" placeholder="0,00">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="fp_boleto">Boleto</label>
+                                        <input type="text" id="fp_boleto" name="fp_boleto" class="form-control" placeholder="0,00">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="fp_deposito">Depósito</label>
+                                        <input type="text" id="fp_deposito" name="fp_deposito" class="form-control" placeholder="0,00">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="fp_cheque">Cheque</label>
+                                        <input type="text" id="fp_cheque" name="fp_cheque" class="form-control" placeholder="0,00">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="fp_cartao_debito">Cartão Débito</label>
+                                        <input type="text" id="fp_cartao_debito" name="fp_cartao_debito" class="form-control" placeholder="0,00">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label for="fp_cartao_credito">Cartão Crédito</label>
+                                        <input type="" id="fp_cartao_credito" name="fp_cartao_credito" class="form-control" placeholder="0,00">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="fp_cartao_debito">Parcelas Crédito</label>
+                                        <select name="fp_parcelas_cartao" id="fp_parcelas_cartao" class="form-control">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="valor_parcela">Valor da parcela</label>
+                                        <input type="text" id="valor_parcela" name="valor_parcela" class="form-control" placeholder="0,00" disabled>
+                                    </div>
+                                    <div class="col-lg-offset-2 col-lg-2">
+                                        <label for="fp_total">TOTAL</label>
+                                        <input type="text" id="fp_total" name="fp_total" class="form-control" placeholder="0,00" disabled>
                                     </div>
                                 </div>
                                 <br>

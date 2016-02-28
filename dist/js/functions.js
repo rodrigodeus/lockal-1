@@ -560,4 +560,40 @@ $(document).ready(function(){
             fn_pesquisa_cliente();
         }
     });
+
+    $('#eq_instal').on('keyup', function(){
+        var fp_dinheiro = document.getElementById("fp_dinheiro");
+        var fp_boleto = document.getElementById("fp_boleto");
+        var fp_deposito = document.getElementById("fp_deposito");
+        var fp_cheque = document.getElementById("fp_cheque");
+        var fp_cartao_debito = document.getElementById("fp_cartao_debito");
+        var fp_cartao_credito = document.getElementById("fp_cartao_credito");
+        var fp_parcelas_cartao = document.getElementById("fp_parcelas_cartao");
+        var valor_parcela =  document.getElementById("valor_parcela");
+        var fp_total = document.getElementById("fp_total");
+
+        var total = 0;
+        valor_parcela.value=fp_cartao_credito.value;
+
+        var a = [
+            fp_dinheiro,
+            fp_boleto,
+            fp_deposito,
+            fp_cheque,
+            fp_cartao_debito,
+            fp_cartao_credito
+            ];
+
+        for( b in a){
+            var c = a[b].value.replace(",",".");
+            total += Number(c);
+        }
+        fp_total.value = total.toFixed(2);
+    });
+
+    $("#fp_parcelas_cartao").on('change', function(){
+        var fp_cartao_credito =  document.getElementById("fp_cartao_credito");
+        var valor_parcela =  document.getElementById("valor_parcela");
+        valor_parcela.value =( Number(fp_cartao_credito.value.replace(",","."))/this.value).toFixed(2);
+    });
 });
