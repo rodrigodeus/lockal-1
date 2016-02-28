@@ -29,7 +29,7 @@ include_once "head.php";
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <form action="../backend/update_clientes.php" method="post" enctype="multipart/form-data">
+                <form action="../backend/update_contratos.php" method="post" enctype="multipart/form-data">
                     <br>
                     <!--Contrato-->
                     <div class="row">
@@ -42,12 +42,13 @@ include_once "head.php";
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Data da Instalação</label>
                                         <input type="date" id="data_instalacao" name="data_instalacao"
-                                               class="form-control" value="<?=date('Y-m-d');?>" required>
+                                               class="form-control" value="<?= date('Y-m-d'); ?>" >
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Vencimento do Contrato</label>
                                         <input type="date" id="data_vencimento" name="data_vencimento"
-                                               class="form-control" value="<?=date('Y-m-d', strtotime("+1 year"))?>" required>
+                                               class="form-control" value="<?= date('Y-m-d', strtotime("+1 year")) ?>"
+                                               >
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Cód. Cliente Power</label>
@@ -69,6 +70,7 @@ include_once "head.php";
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label for="data_instalacao">Pesquisar Cliente</label>
+
                                         <div class="input-group">
                                             <input id="ipt_pesquisa_cliente" type="text" class="form-control"
                                                    placeholder="Perquisar cliente">
@@ -83,16 +85,19 @@ include_once "head.php";
                                     <!-- /.col-lg-6 -->
                                     <div class="col-lg-2">
                                         <label for="">Cadastrar Cliente</label><br>
-                                        <a href="detalhe_cliente.php?codigo=0&r=1" class="btn btn-primary btn-group-justified">Cadastrar</a>
+                                        <a href="detalhe_cliente.php?codigo=0&r=1"
+                                           class="btn btn-primary btn-group-justified">Cadastrar</a>
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <label for="id">Id</label>
-                                                <input readonly type="text" id="cod_cliente" name="cod_cliente" class="form-control"
+                                                <input readonly type="text" id="cod_cliente" name="cod_cliente"
+                                                       class="form-control"
                                                        value="<?= $_GET['codigo'] ?>">
                                             </div>
                                             <div class="col-md-5">
@@ -126,12 +131,14 @@ include_once "head.php";
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="cod_parceiro">Parceiro ID</label>
-                                                <input disabled type="text" id="cod_parceiro" name="cod_parceiro" class="form-control" disabled
+                                                <input type="text" id="cod_parceiro" name="cod_parceiro"
+                                                       class="form-control"
                                                        value="<?= @$cod_parceiro ?>">
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="nome_parceiro">Parceiro Nome</label>
-                                                <input disabled type="text" id="nome_parceiro" name="" class="form-control" disabled
+                                                <input disabled type="text" id="nome_parceiro" name=""
+                                                       class="form-control" disabled
                                                        value="<?= @$nome_parceiro ?>">
                                             </div>
                                         </div>
@@ -184,13 +191,13 @@ include_once "head.php";
                                             <div class="col-md-2">
                                                 <label for="">UF</label>
                                                 <?php
-                                                $consulta = "SELECT sigla,sigla FROM estados";
-                                                $nome = "uf";
-                                                $itemPadrao = @$uf;
-                                                $css = "form-control";
-                                                $js= 'disabled';
-                                                echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
-                                                ?>
+                                        $consulta = "SELECT sigla,sigla FROM estados";
+                                        $nome = "uf";
+                                        $itemPadrao = @$uf;
+                                        $css = "form-control";
+                                        $js = 'disabled';
+                                        echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
+                                        ?>
                                             </div>
 
                                         </div>
@@ -244,6 +251,7 @@ include_once "head.php";
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Veículo</label>
+
                                         <div id="slt_veiculos">
                                             <select name="cod_veiculo" id="cod_veiculo" class="form-control"></select>
                                         </div>
@@ -254,32 +262,34 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label for="placa">Placa</label>
-                                            <input type="text" id="placa" name="placa" class="form-control">
+                                        <input type="text" id="placa" name="placa" class="form-control">
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="ano_fabricacao">Ano de Fabricação</label>
                                         <input type="date" id="ano_fabricacao" name="ano_fabricacao"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="" >
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="ano_modelo">Ano do Modelo</label>
                                         <input type="date" id="ano_modelo" name="ano_modelo"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="" >
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label for="chassi">Chassi</label>
                                         <input type="text" id="chassi" name="chassi" class="form-control">
-                                </div>
+                                    </div>
                                     <div class="col-lg-4">
                                         <label for="renavan">Renavan</label>
                                         <input type="text" id="renavan" name="renavan"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="" >
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="seguradora">Seguradora</label>
@@ -316,14 +326,16 @@ include_once "head.php";
                                     <div class="col-lg-3">
                                         <label for="serial">Serial</label>
                                         <input type="text" id="serial" name="serial"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="" >
                                     </div>
 
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Modelo</label>
+
                                         <div id="slt_rastreador">
                                             <?php
                                             $consulta = "SELECT codigo,modelo FROM rastreadores ORDER BY fabricante";
@@ -341,7 +353,7 @@ include_once "head.php";
                                     <div class="col-lg-3">
                                         <label for="chip_2">Chip 2</label>
                                         <input type="text" id="chip_2" name="chip_2"
-                                               class="form-control" value="" required>
+                                               class="form-control" value="" >
                                     </div>
                                 </div>
                                 <br>
@@ -359,30 +371,36 @@ include_once "head.php";
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <label for="fp_dinheiro">Dinheiro</label>
-                                        <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control"
+                                               placeholder="0,00">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_boleto">Boleto</label>
-                                        <input type="text" id="fp_boleto" name="fp_boleto" class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_boleto" name="fp_boleto" class="form-control"
+                                               placeholder="0,00">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_deposito">Depósito</label>
-                                        <input type="text" id="fp_deposito" name="fp_deposito" class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_deposito" name="fp_deposito" class="form-control"
+                                               placeholder="0,00">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cheque">Cheque</label>
-                                        <input type="text" id="fp_cheque" name="fp_cheque" class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_cheque" name="fp_cheque" class="form-control"
+                                               placeholder="0,00">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_debito">Cartão Débito</label>
-                                        <input type="text" id="fp_cartao_debito" name="fp_cartao_debito" class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_cartao_debito" name="fp_cartao_debito"
+                                               class="form-control" placeholder="0,00">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_credito">Cartão Crédito</label>
-                                        <input type="" id="fp_cartao_credito" name="fp_cartao_credito" class="form-control" placeholder="0,00">
+                                        <input type="" id="fp_cartao_credito" name="fp_cartao_credito"
+                                               class="form-control" placeholder="0,00">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_debito">Parcelas Crédito</label>
@@ -394,17 +412,108 @@ include_once "head.php";
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="valor_parcela">Valor da parcela</label>
-                                        <input type="text" id="valor_parcela" name="valor_parcela" class="form-control" placeholder="0,00" disabled>
+                                        <input type="text" id="valor_parcela" name="valor_parcela" class="form-control"
+                                               placeholder="0,00" disabled>
                                     </div>
                                     <div class="col-lg-offset-2 col-lg-2">
                                         <label for="fp_total">TOTAL</label>
-                                        <input type="text" id="fp_total" name="fp_total" class="form-control" placeholder="0,00" disabled>
+                                        <input type="text" id="fp_total" name="fp_total" class="form-control"
+                                               placeholder="0,00" disabled>
                                     </div>
                                 </div>
                                 <br>
                             </div>
                         </div>
                     </div>
+
+                    <!--Mensalidade-->
+                    <div class="row" id="mensalidade">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Mensalidade
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-2" id="t_mensalidade">
+                                            <label class="radio">
+                                                <input type="radio" name="tipo_mensalidade" id="" checked
+                                                       value="boleto">Boleto
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="tipo_mensalidade" id=""
+                                                       value="debito">Débito em conta
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="tipo_mensalidade" id=""
+                                                       value="credito">Cartão de Crédito
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label for="me_total">Total do Contrato</label>
+                                            <input type="text" id="me_total" name="me_total" class="form-control"
+                                                   placeholder="0,00">
+                                        </div>
+                                        <div class="col-lg-2">
+                                        <label for="me_parcelas">Parcelas</label>
+                                            <select name="me_parcelas" id="me_parcelas"
+                                                    class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12" selected>12</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-2">
+                                        <label for="valor_me_parcela">Valor da parcela</label>
+                                            <input type="text" id="valor_me_parcela" name="valor_me_parcela"
+                                                   class="form-control"
+                                                   placeholder="0,00" disabled>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <label for="me_dia_vencimento">Dia do vencimento</label>
+                                            <select name="me_dia_vencimento" id="me_dia_vencimento"
+                                                    class="form-control">
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="dados_conta">
+                                    <hr>
+                                    <div class="col-lg-2">
+                                        <label for="me_banco">Banco</label>
+                                        <input type="text" id="me_banco" name="me_banco" class="form-control">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="me_agencia">Agência</label>
+                                        <input type="text" id="me_agencia" name="me_agencia" class="form-control">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label for="me_conta">Conta</label>
+                                        <input type="text" id="me_conta" name="me_conta" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Botoes-->
+                    <div class="row" id="">
+                        <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+                    </div>
+
                 </form>
             </div>
         </div>

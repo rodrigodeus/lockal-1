@@ -572,8 +572,10 @@ $(document).ready(function(){
         var valor_parcela =  document.getElementById("valor_parcela");
         var fp_total = document.getElementById("fp_total");
 
+
         var total = 0;
         valor_parcela.value=fp_cartao_credito.value;
+
 
         var a = [
             fp_dinheiro,
@@ -596,4 +598,36 @@ $(document).ready(function(){
         var valor_parcela =  document.getElementById("valor_parcela");
         valor_parcela.value =( Number(fp_cartao_credito.value.replace(",","."))/this.value).toFixed(2);
     });
+
+    $('#mensalidade').on('keyup', function(){
+        var me_total =  document.getElementById("me_total");
+        var valor_me_parcela =  document.getElementById("valor_me_parcela");
+        var me_parcelas =  document.getElementById("me_parcelas");
+        valor_me_parcela.value= (Number(me_total.value.replace(",",".")) / Number(me_parcelas.value)).toFixed(2);
+    });
+
+    var a = document.getElementsByName('tipo_mensalidade');
+    $('#dados_conta').fadeOut();
+    for( b in a){
+        if(a[b].checked && a[b].value == "debito"){
+            $('#dados_conta').fadeIn();
+        };
+    }
+
+    $('#t_mensalidade').on('change', function(){
+        var a = document.getElementsByName('tipo_mensalidade');
+        $('#dados_conta').fadeOut();
+        for( b in a){
+            if(a[b].checked && a[b].value == "debito"){
+                $('#dados_conta').fadeIn();
+            };
+        }
+    });
+
+    $("#me_parcelas").on('change', function(){
+        var me_total =  document.getElementById("me_total");
+        var valor_me_parcela =  document.getElementById("valor_me_parcela");
+        valor_me_parcela.value =( Number(me_total.value.replace(",","."))/this.value).toFixed(2);
+    });
+
 });

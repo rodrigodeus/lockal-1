@@ -197,10 +197,8 @@ include_once "head.php";
                                                value="<?= @$contato_parentesco ?>"
                                                placeholder="pai,mão,irmão,vizinho...">
                                     </div>
-
                                 </div>
                                 <br>
-
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="contato_tel_1">Fone 1</label>
@@ -224,7 +222,6 @@ include_once "head.php";
                     </div>
                 </div>
             </div>
-
             <!--Botoes-->
             <div class="row">
                 <div class="row">

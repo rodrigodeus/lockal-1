@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="892fbbb6-ab0c-41a9-94f9-a230b1e6268d" name="Default" comment="parceiros">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/backend/update_contratos.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detalhe_cliente.php" afterPath="$PROJECT_DIR$/pages/detalhe_cliente.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/detalhe_contrato.php" afterPath="$PROJECT_DIR$/pages/detalhe_contrato.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/functions.js" afterPath="$PROJECT_DIR$/dist/js/functions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/update_clientes.php" afterPath="$PROJECT_DIR$/backend/update_clientes.php" />
     </list>
     <list id="c1ac64ce-53b4-47dd-88b3-3191f4edf486" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="46b69e24-d9a1-40e2-ab13-707cbc1d01b0" name="Rejected commit: Default (2)" comment="parceiros" />
@@ -27,16 +30,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="detalhe_cliente.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/detalhe_cliente.php">
+      <file leaf-file-name="update_clientes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/update_clientes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.615385">
-              <caret line="354" column="18" selection-start-line="354" selection-start-column="18" selection-end-line="354" selection-end-column="18" />
-              <folding>
-                <element signature="n#div#3;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1456597571711" expanded="true" signature="73:220" placeholder="SELECT a.*,b..clientes..." />
-                <marker date="1456597571711" expanded="true" signature="6797:6828" placeholder="SELECT sigla..estados..." />
-              </folding>
+            <state vertical-scroll-proportion="-17.538462">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_contratos.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/update_contratos.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/dist/js/functions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="585" column="0" selection-start-line="585" selection-start-column="0" selection-end-line="585" selection-end-column="0" />
+              <caret line="615" column="0" selection-start-line="615" selection-start-column="0" selection-end-line="615" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,9 +85,11 @@
       <file leaf-file-name="teste.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/teste.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-15.038462">
               <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1456189100912" expanded="true" signature="316:388" placeholder="INSERT INTO ..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,14 +97,16 @@
       <file leaf-file-name="detalhe_contrato.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/detalhe_contrato.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63978493">
-              <caret line="401" column="42" selection-start-line="401" selection-start-column="42" selection-end-line="401" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.610586">
+              <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
               <folding>
-                <marker date="1456671660459" expanded="true" signature="73:192" placeholder="SELECT a.*,b..clientes..." />
-                <marker date="1456671660459" expanded="true" signature="11325:11356" placeholder="SELECT sigla..estados..." />
-                <marker date="1456671660459" expanded="true" signature="14181:14225" placeholder="SELECT codig..marcas..." />
-                <marker date="1456671660459" expanded="true" signature="18299:18361" placeholder="SELECT codig..rastreadores..." />
-                <marker date="1456671660459" expanded="true" signature="19779:19837" placeholder="SELECT codig..rastreadores..." />
+                <element signature="n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#5;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <marker date="1456679506285" expanded="true" signature="73:192" placeholder="SELECT a.*,b..clientes..." />
+                <marker date="1456679506285" expanded="true" signature="11545:11576" placeholder="SELECT sigla..estados..." />
+                <marker date="1456679506285" expanded="true" signature="14354:14398" placeholder="SELECT codig..marcas..." />
+                <marker date="1456679506285" expanded="true" signature="18451:18513" placeholder="SELECT codig..rastreadores..." />
+                <marker date="1456679506285" expanded="true" signature="19925:19983" placeholder="SELECT codig..rastreadores..." />
               </folding>
             </state>
           </provider>
@@ -130,10 +143,10 @@
         <option value="$PROJECT_DIR$/pages/teste.php" />
         <option value="$PROJECT_DIR$/backend/select_modelo.php" />
         <option value="$PROJECT_DIR$/backend/select_cliente.php" />
-        <option value="$PROJECT_DIR$/backend/update_clientes.php" />
-        <option value="$PROJECT_DIR$/pages/detalhe_cliente.php" />
-        <option value="$PROJECT_DIR$/pages/detalhe_contrato.php" />
         <option value="$PROJECT_DIR$/dist/js/functions.js" />
+        <option value="$PROJECT_DIR$/pages/detalhe_cliente.php" />
+        <option value="$PROJECT_DIR$/backend/update_clientes.php" />
+        <option value="$PROJECT_DIR$/pages/detalhe_contrato.php" />
       </list>
     </option>
   </component>
@@ -436,13 +449,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/delete_cliente.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/js/functions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -742,22 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/teste.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/update_clientes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8515206">
-          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/nav.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.730769">
@@ -776,6 +766,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/teste.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.038462">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <marker date="1456189100912" expanded="true" signature="316:388" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/select_cliente.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.576923">
@@ -786,36 +786,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/js/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="615" column="0" selection-start-line="615" selection-start-column="0" selection-end-line="615" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/detalhe_cliente.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.615385">
-          <caret line="354" column="18" selection-start-line="354" selection-start-column="18" selection-end-line="354" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.3327032">
+          <caret line="252" column="72" selection-start-line="252" selection-start-column="70" selection-end-line="252" selection-end-column="72" />
           <folding>
-            <element signature="n#div#3;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1456597571711" expanded="true" signature="73:220" placeholder="SELECT a.*,b..clientes..." />
-            <marker date="1456597571711" expanded="true" signature="6797:6828" placeholder="SELECT sigla..estados..." />
+            <marker date="1456678644206" expanded="true" signature="-1:-1" placeholder="SELECT a.*,b..clientes..." />
+            <marker date="1456678644206" expanded="true" signature="-1:-1" placeholder="SELECT sigla..estados..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/js/functions.js">
+    <entry file="file://$PROJECT_DIR$/backend/update_clientes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.538462">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/update_contratos.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="585" column="0" selection-start-line="585" selection-start-column="0" selection-end-line="585" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/detalhe_contrato.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63978493">
-          <caret line="401" column="42" selection-start-line="401" selection-start-column="42" selection-end-line="401" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.610586">
+          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
           <folding>
-            <marker date="1456671660459" expanded="true" signature="73:192" placeholder="SELECT a.*,b..clientes..." />
-            <marker date="1456671660459" expanded="true" signature="11325:11356" placeholder="SELECT sigla..estados..." />
-            <marker date="1456671660459" expanded="true" signature="14181:14225" placeholder="SELECT codig..marcas..." />
-            <marker date="1456671660459" expanded="true" signature="18299:18361" placeholder="SELECT codig..rastreadores..." />
-            <marker date="1456671660459" expanded="true" signature="19779:19837" placeholder="SELECT codig..rastreadores..." />
+            <element signature="n#div#4;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1456679506285" expanded="true" signature="73:192" placeholder="SELECT a.*,b..clientes..." />
+            <marker date="1456679506285" expanded="true" signature="11545:11576" placeholder="SELECT sigla..estados..." />
+            <marker date="1456679506285" expanded="true" signature="14354:14398" placeholder="SELECT codig..marcas..." />
+            <marker date="1456679506285" expanded="true" signature="18451:18513" placeholder="SELECT codig..rastreadores..." />
+            <marker date="1456679506285" expanded="true" signature="19925:19983" placeholder="SELECT codig..rastreadores..." />
           </folding>
         </state>
       </provider>
