@@ -3,12 +3,22 @@ require_once "../backend/first_all.php";
 
 $bd = new BD();
 
-$sql = "SELECT a.*,b.apelido_fantasia parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
+$sql = "SELECT a.*,b.apelido_fantasia nome_parceiro,
+        c.codigo cod_cliente, c.apelido_fantasia, c.nome_razao,c.cpf_cnpj, c.rg_insc_est
+        FROM contratos a
+        LEFT JOIN parceiros b on b.codigo=a.cod_parceiro
+        JOIN clientes c on c.codigo=a.cod_cliente
+        WHERE a.codigo=" . $_GET['codigo'];
+echo $sql;
 $bd->query($sql);
 $resposta = $bd->getResult("array");
 
 if ($resposta) {
     extract($resposta[0]);
+    echo "<pre>";
+    print_r($resposta[0]);
+    echo "</pre>";
+
 }
 ?>
 
@@ -30,36 +40,8 @@ include_once "head.php";
         <div class="container-fluid">
             <div class="row">
                 <form action="../backend/update_contratos.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $_GET['codigo']; ?>">
                     <br>
-                    <!--Contrato-->
-                    <div class="row">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                Contrato
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label for="data_instalacao">Data da Instalação</label>
-                                        <input type="date" id="data_instalacao" name="data_instalacao"
-                                               class="form-control" value="<?= date('Y-m-d'); ?>" >
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="data_instalacao">Vencimento do Contrato</label>
-                                        <input type="date" id="data_vencimento" name="data_vencimento"
-                                               class="form-control" value="<?= date('Y-m-d', strtotime("+1 year")) ?>"
-                                               >
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="data_instalacao">Cód. Cliente Power</label>
-                                        <input type="text" id="cod_power" name="cod_power" class="form-control"
-                                               value="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!--Cliente-->
                     <div class="row">
                         <div class="panel panel-primary">
@@ -98,7 +80,7 @@ include_once "head.php";
                                                 <label for="id">Id</label>
                                                 <input readonly type="text" id="cod_cliente" name="cod_cliente"
                                                        class="form-control"
-                                                       value="<?= $_GET['codigo'] ?>">
+                                                       value="<?= @$cod_cliente ?>">
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="nome_razao">Nome / Razão Social</label>
@@ -132,7 +114,7 @@ include_once "head.php";
                                             <div class="col-md-2">
                                                 <label for="cod_parceiro">Parceiro ID</label>
                                                 <input type="text" id="cod_parceiro" name="cod_parceiro"
-                                                       class="form-control"
+                                                       class="form-control" readonly
                                                        value="<?= @$cod_parceiro ?>">
                                             </div>
                                             <div class="col-md-2">
@@ -142,88 +124,6 @@ include_once "head.php";
                                                        value="<?= @$nome_parceiro ?>">
                                             </div>
                                         </div>
-                                        <br>
-                                        <!--
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label for="">CEP</label>
-                                                <input disabled type="number" maxlength="8" id="cep" name="cep"
-                                                       class="form-control"
-                                                       placeholder="Buscar" value="<?= $cep ?>"
-                                                       onblur="buscar_cep(this.value)">
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="endereco">Endereço </label>
-                                                <input disabled type="text" id="endereco" name="endereco"
-                                                       class="form-control"
-                                                       value="<?= @$endereco ?>" onblur="meu_mapa()">
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <label for="numero">Número</label>
-                                                <input disabled type="text" id="numero" name="numero"
-                                                       class="form-control" value="<?= @$numero ?> "
-                                                       onblur="meu_mapa()">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="complemento">Complemento</label>
-                                                <input disabled type="text" id="complemento" name="complemento"
-                                                       class="form-control" value="<?= @$complemento ?>">
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label for="bairro">Bairro</label>
-                                                <input disabled type="text" id="bairro" name="bairro"
-                                                       class="form-control"
-                                                       value="<?= @$bairro ?>">
-                                            </div>
-
-                                            <div class="col-md-5">
-                                                <label for="cidade">Cidade </label>
-                                                <input disabled type="text" id="cidade" name="cidade"
-                                                       class="form-control"
-                                                       value="<?= @$cidade ?>" onblur="meu_mapa()">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="">UF</label>
-                                                <?php
-                                        $consulta = "SELECT sigla,sigla FROM estados";
-                                        $nome = "uf";
-                                        $itemPadrao = @$uf;
-                                        $css = "form-control";
-                                        $js = 'disabled';
-                                        echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
-                                        ?>
-                                            </div>
-
-                                        </div>
-                                        <br>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="tel_1">Fone 1</label>
-                                                <input disabled type="text" id="tel_1" name="tel_1" class="form-control"
-                                                       value="<?= @$tel_1 ?>">
-
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <label for="tel_2">Fone 2</label>
-                                                <input disabled type="text" id="tel_2" name="tel_2" class="form-control"
-                                                       value="<?= @$tel_2 ?>">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="">Email </label>
-                                                <input disabled class="form-control" placeholder="E-mail" name="email"
-                                                       id="email"
-                                                       type="email" value="<?= @$email ?>">
-                                            </div>
-                                        </div>
-                                        -->
                                         <br>
                                     </div>
                                 </div>
@@ -243,8 +143,8 @@ include_once "head.php";
                                         <label for="">Fabricante</label>
                                         <?php
                                         $consulta = "SELECT codigo,nome FROM marcas ORDER BY nome";
-                                        $nome = "fabricante";
-                                        $itemPadrao = "";
+                                        $nome = "cod_fabricante";
+                                        $itemPadrao = @$cod_fabricante;
                                         $css = "form-control";
                                         echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
                                         ?>
@@ -253,12 +153,19 @@ include_once "head.php";
                                         <label for="">Veículo</label>
 
                                         <div id="slt_veiculos">
-                                            <select name="cod_veiculo" id="cod_veiculo" class="form-control"></select>
+                                            <?php
+                                            $consulta = "SELECT codigo,nome FROM veiculos ORDER BY nome";
+                                            $nome = "cod_veiculo";
+                                            $itemPadrao = @$cod_veiculo;
+                                            $css = "form-control";
+                                            echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cor">Cor</label><br>
-                                        <input type="text" id="cor" name="cor" class="form-control">
+                                        <input type="text" id="cor" name="cor" class="form-control"
+                                               value="<?= @$cor ?>">
                                     </div>
                                 </div>
                                 <br>
@@ -266,17 +173,18 @@ include_once "head.php";
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label for="placa">Placa</label>
-                                        <input type="text" id="placa" name="placa" class="form-control">
+                                        <input type="text" id="placa" name="placa" class="form-control"
+                                               value="<?= @$placa ?>">
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="ano_fabricacao">Ano de Fabricação</label>
-                                        <input type="date" id="ano_fabricacao" name="ano_fabricacao"
-                                               class="form-control" value="" >
+                                        <input type="number" id="ano_fabricacao" name="ano_fabricacao"
+                                               class="form-control" value="<?= @$ano_fabricacao ?>">
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="ano_modelo">Ano do Modelo</label>
-                                        <input type="date" id="ano_modelo" name="ano_modelo"
-                                               class="form-control" value="" >
+                                        <input type="number" id="ano_modelo" name="ano_modelo"
+                                               class="form-control" value="<?= @$ano_modelo ?>">
                                     </div>
                                 </div>
                                 <br>
@@ -284,17 +192,18 @@ include_once "head.php";
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <label for="chassi">Chassi</label>
-                                        <input type="text" id="chassi" name="chassi" class="form-control">
+                                        <input type="text" id="chassi" name="chassi" class="form-control"
+                                               value="<?= @$chassi ?>">
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="renavan">Renavan</label>
                                         <input type="text" id="renavan" name="renavan"
-                                               class="form-control" value="" >
+                                               class="form-control" value="<?= @$renavan ?>">
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="seguradora">Seguradora</label>
                                         <input type="text" id="seguradora" name="seguradora"
-                                               class="form-control" value="">
+                                               class="form-control" value="<?= @$seguradora ?>">
                                     </div>
                                 </div>
                             </div>
@@ -312,21 +221,22 @@ include_once "head.php";
                                     <div class="col-md-6">
                                         <label for="">Fabricante</label>
                                         <?php
-                                        $consulta = "SELECT codigo,fabricante FROM rastreadores ORDER BY fabricante";
+                                        $consulta = "SELECT codigo, fabricante FROM rastreadores ORDER BY fabricante";
                                         $nome = "";
-                                        $itemPadrao = "";
+                                        $itemPadrao = @$cod_rastreador;
                                         $css = "form-control";
                                         echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
                                         ?>
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="imei">IMEI</label>
-                                        <input type="text" id="imei" name="imei" class="form-control">
+                                        <input type="text" id="imei" name="imei" class="form-control"
+                                               value="<?= @$imei ?>">
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="serial">Serial</label>
                                         <input type="text" id="serial" name="serial"
-                                               class="form-control" value="" >
+                                               class="form-control" value="<?= @$serial ?>">
                                     </div>
 
                                 </div>
@@ -340,7 +250,7 @@ include_once "head.php";
                                             <?php
                                             $consulta = "SELECT codigo,modelo FROM rastreadores ORDER BY fabricante";
                                             $nome = "cod_rastreador";
-                                            $itemPadrao = "";
+                                            $itemPadrao = @$cod_rastreador;
                                             $css = "form-control";
                                             echo $bd->SetComboSelect($consulta, $nome, $itemPadrao, $css);
                                             ?>
@@ -348,12 +258,13 @@ include_once "head.php";
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="chip_1">Chip 1</label>
-                                        <input type="text" id="chip_1" name="chip_1" class="form-control">
+                                        <input type="text" id="chip_1" name="chip_1" class="form-control"
+                                               value="<?= @$chip_1 ?>">
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="chip_2">Chip 2</label>
                                         <input type="text" id="chip_2" name="chip_2"
-                                               class="form-control" value="" >
+                                               class="form-control" value="<?= @$chip_2 ?>">
                                     </div>
                                 </div>
                                 <br>
@@ -372,48 +283,53 @@ include_once "head.php";
                                     <div class="col-lg-2">
                                         <label for="fp_dinheiro">Dinheiro</label>
                                         <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control"
-                                               placeholder="0,00">
+                                               placeholder="0,00" value="<?= @$fp_dinheiro ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_boleto">Boleto</label>
                                         <input type="text" id="fp_boleto" name="fp_boleto" class="form-control"
-                                               placeholder="0,00">
+                                               placeholder="0,00" value="<?= @$fp_boleto ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_deposito">Depósito</label>
                                         <input type="text" id="fp_deposito" name="fp_deposito" class="form-control"
-                                               placeholder="0,00">
+                                               placeholder="0,00" value="<?= @$fp_deposito ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cheque">Cheque</label>
                                         <input type="text" id="fp_cheque" name="fp_cheque" class="form-control"
-                                               placeholder="0,00">
+                                               placeholder="0,00" value="<?= @$fp_cheque ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_debito">Cartão Débito</label>
                                         <input type="text" id="fp_cartao_debito" name="fp_cartao_debito"
-                                               class="form-control" placeholder="0,00">
+                                               class="form-control" placeholder="0,00"
+                                               value="<?= @$fp_cartao_debito ?>">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_credito">Cartão Crédito</label>
-                                        <input type="" id="fp_cartao_credito" name="fp_cartao_credito"
-                                               class="form-control" placeholder="0,00">
+                                        <input type="text" id="fp_cartao_credito" name="fp_cartao_credito"
+                                               class="form-control" placeholder="0,00"
+                                               value="<?= @$fp_cartao_credito ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_debito">Parcelas Crédito</label>
                                         <select name="fp_parcelas_cartao" id="fp_parcelas_cartao" class="form-control">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                            <option value="1" <?= (@$fp_parcelas_cartao == 1) ? 'selected' : '' ?>>1
+                                            </option>
+                                            <option value="2" <?= (@$fp_parcelas_cartao == 2) ? 'selected' : '' ?>>2
+                                            </option>
+                                            <option value="3" <?= (@$fp_parcelas_cartao == 3) ? 'selected' : '' ?>>3
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="valor_parcela">Valor da parcela</label>
                                         <input type="text" id="valor_parcela" name="valor_parcela" class="form-control"
-                                               placeholder="0,00" disabled>
+                                               placeholder="0,00" disabled value="">
                                     </div>
                                     <div class="col-lg-offset-2 col-lg-2">
                                         <label for="fp_total">TOTAL</label>
@@ -422,6 +338,36 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Contrato-->
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                Contrato
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label for="data_instalacao">Data da Instalação</label>
+                                        <input type="date" id="data_instalacao" name="data_instalacao"
+                                               class="form-control"
+                                               value="<?= ($_GET['codigo'] == 0) ? date('Y-m-d') : $data_instalacao; ?>">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="data_instalacao">Vencimento do Contrato</label>
+                                        <input type="date" id="data_vencimento" name="data_vencimento"
+                                               class="form-control"
+                                               value="<?= ($_GET['codigo'] == 0) ? date('Y-m-d', strtotime('+1 year, -1 day')) : $data_vencimento; ?>">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="cod_power">Cód. Cliente Power</label>
+                                        <input type="text" id="cod_power" name="cod_power" class="form-control"
+                                               value="<?= @$cod_power ?>">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -437,43 +383,40 @@ include_once "head.php";
                                     <div class="col-lg-12">
                                         <div class="col-lg-2" id="t_mensalidade">
                                             <label class="radio">
-                                                <input type="radio" name="tipo_mensalidade" id="" checked
+                                                <input type="radio" name="tipo_mensalidade"
+                                                       id="" <?= (@$tipo_mensalidade == 'boleto') ? 'checked' : '' ?>
                                                        value="boleto">Boleto
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="tipo_mensalidade" id=""
-                                                       value="debito">Débito em conta
+                                                <input type="radio" name="tipo_mensalidade"
+                                                       id="" <?= (@$tipo_mensalidade == 'debito') ? 'checked' : '' ?>
+                                                       value="debito">Débito
                                             </label>
                                             <label class="radio">
-                                                <input type="radio" name="tipo_mensalidade" id=""
+                                                <input type="radio" name="tipo_mensalidade"
+                                                       id="" <?= (@$tipo_mensalidade == 'credito') ? 'checked' : '' ?>
                                                        value="credito">Cartão de Crédito
                                             </label>
                                         </div>
                                         <div class="col-lg-2">
                                             <label for="me_total">Total do Contrato</label>
                                             <input type="text" id="me_total" name="me_total" class="form-control"
-                                                   placeholder="0,00">
+                                                   placeholder="0,00" value="<?= @$me_total ?>">
                                         </div>
                                         <div class="col-lg-2">
-                                        <label for="me_parcelas">Parcelas</label>
+                                            <label for="me_parcelas">Parcelas</label>
                                             <select name="me_parcelas" id="me_parcelas"
                                                     class="form-control">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12" selected>12</option>
+                                                <?php
+                                                for ($i = 1; $i < 13; $i++) {
+                                                    $selected = (@$fp_parcelas_cartao == $i) ? 'selected' : '';
+                                                    echo "<option value='$i' $selected >$i</option>";
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-2">
-                                        <label for="valor_me_parcela">Valor da parcela</label>
+                                            <label for="valor_me_parcela">Valor da parcela</label>
                                             <input type="text" id="valor_me_parcela" name="valor_me_parcela"
                                                    class="form-control"
                                                    placeholder="0,00" disabled>
@@ -482,9 +425,13 @@ include_once "head.php";
                                             <label for="me_dia_vencimento">Dia do vencimento</label>
                                             <select name="me_dia_vencimento" id="me_dia_vencimento"
                                                     class="form-control">
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
+                                                <?php
+
+                                                for ($i = 10; $i < 31; $i += 10) {
+                                                    $selected = (@$me_dia_vencimento == $i) ? 'selected' : '';
+                                                    echo "<option value='$i' $selected >$i</option>";
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -493,15 +440,18 @@ include_once "head.php";
                                     <hr>
                                     <div class="col-lg-2">
                                         <label for="me_banco">Banco</label>
-                                        <input type="text" id="me_banco" name="me_banco" class="form-control">
+                                        <input type="text" id="me_banco" name="me_banco" class="form-control"
+                                               value="<?= @$me_banco ?>">
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="me_agencia">Agência</label>
-                                        <input type="text" id="me_agencia" name="me_agencia" class="form-control">
+                                        <input type="text" id="me_agencia" name="me_agencia" class="form-control"
+                                               value="<?= @$me_agencia ?>">
                                     </div>
                                     <div class="col-lg-3">
                                         <label for="me_conta">Conta</label>
-                                        <input type="text" id="me_conta" name="me_conta" class="form-control">
+                                        <input type="text" id="me_conta" name="me_conta" class="form-control"
+                                               value="<?= @$me_conta ?>">
                                     </div>
                                 </div>
                                 <br>
@@ -517,24 +467,7 @@ include_once "head.php";
                 </form>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+
         <!-- /#wrapper -->
 
         <!-- Modal -->
@@ -555,7 +488,8 @@ include_once "head.php";
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+
+        <!-- Modal Loading-->
         <div class="modal fade" id="modalLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
 
         <?php

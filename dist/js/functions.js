@@ -517,7 +517,7 @@ function fn_pesquisa_cliente() {
     xmlhttp.send();
 }
 $(document).ready(function(){
-    $("#fabricante").on('change',function(){
+    $("#cod_fabricante").on('change',function(){
         $("#modalLoading").modal("show");
         $.ajax({
             type: "get",
@@ -540,9 +540,9 @@ $(document).ready(function(){
                 url: "../backend/select_cliente.php?codigo=" + cod_cliente,
                 success: function (result) {
                     //$("#slt_veiculos").html(result);
-                    console.log(result);
+                    //console.log(result);
                     var json = JSON.parse(result);
-                    console.log(json);
+                    //console.log(json);
                     for(var x in json[0]){
                         console.log(json[0][x]);
                         if(document.getElementById(x)){
@@ -562,41 +562,11 @@ $(document).ready(function(){
     });
 
     $('#eq_instal').on('keyup', function(){
-        var fp_dinheiro = document.getElementById("fp_dinheiro");
-        var fp_boleto = document.getElementById("fp_boleto");
-        var fp_deposito = document.getElementById("fp_deposito");
-        var fp_cheque = document.getElementById("fp_cheque");
-        var fp_cartao_debito = document.getElementById("fp_cartao_debito");
-        var fp_cartao_credito = document.getElementById("fp_cartao_credito");
-        var fp_parcelas_cartao = document.getElementById("fp_parcelas_cartao");
-        var valor_parcela =  document.getElementById("valor_parcela");
-        var fp_total = document.getElementById("fp_total");
-
-
-        var total = 0;
-        valor_parcela.value=fp_cartao_credito.value;
-
-
-        var a = [
-            fp_dinheiro,
-            fp_boleto,
-            fp_deposito,
-            fp_cheque,
-            fp_cartao_debito,
-            fp_cartao_credito
-            ];
-
-        for( b in a){
-            var c = a[b].value.replace(",",".");
-            total += Number(c);
-        }
-        fp_total.value = total.toFixed(2);
+        fn_a();
     });
 
     $("#fp_parcelas_cartao").on('change', function(){
-        var fp_cartao_credito =  document.getElementById("fp_cartao_credito");
-        var valor_parcela =  document.getElementById("valor_parcela");
-        valor_parcela.value =( Number(fp_cartao_credito.value.replace(",","."))/this.value).toFixed(2);
+        fn_b();
     });
 
     $('#mensalidade').on('keyup', function(){
@@ -606,6 +576,71 @@ $(document).ready(function(){
         valor_me_parcela.value= (Number(me_total.value.replace(",",".")) / Number(me_parcelas.value)).toFixed(2);
     });
 
+    $('#t_mensalidade').on('change', function(){
+       fn_c();
+    });
+
+    $("#me_parcelas").on('change', function(){
+        fn_e();
+    });
+
+    fn_a();
+    fn_b();
+    fn_c();
+    fn_d();
+    fn_e();
+
+
+});
+
+function fn_a(){
+    var fp_dinheiro = document.getElementById("fp_dinheiro");
+    var fp_boleto = document.getElementById("fp_boleto");
+    var fp_deposito = document.getElementById("fp_deposito");
+    var fp_cheque = document.getElementById("fp_cheque");
+    var fp_cartao_debito = document.getElementById("fp_cartao_debito");
+    var fp_cartao_credito = document.getElementById("fp_cartao_credito");
+    var fp_parcelas_cartao = document.getElementById("fp_parcelas_cartao");
+    var valor_parcela =  document.getElementById("valor_parcela");
+    var fp_total = document.getElementById("fp_total");
+
+    var total = 0;
+
+
+    var a = [
+        fp_dinheiro,
+        fp_boleto,
+        fp_deposito,
+        fp_cheque,
+        fp_cartao_debito,
+        fp_cartao_credito
+    ];
+
+    for( b in a){
+        var c = a[b].value.replace(",",".");
+        total += Number(c);
+    }
+    fp_total.value = total.toFixed(2);
+    fn_b();
+    fn_e();
+}
+function fn_b(){
+    var fp_cartao_credito =  document.getElementById("fp_cartao_credito");
+    var fp_parcelas_cartao =  document.getElementById("fp_parcelas_cartao");
+    var valor_parcela =  document.getElementById("valor_parcela");
+    valor_parcela.value =  Number(fp_cartao_credito.value.replace(",",".")) / Number(fp_parcelas_cartao.value).toFixed(2);
+}
+
+function fn_c(){
+    var a = document.getElementsByName('tipo_mensalidade');
+    $('#dados_conta').fadeOut();
+    for( b in a){
+        if(a[b].checked && a[b].value == "debito") {
+            $('#dados_conta').fadeIn();
+        }
+    };
+}
+function fn_d(){
     var a = document.getElementsByName('tipo_mensalidade');
     $('#dados_conta').fadeOut();
     for( b in a){
@@ -613,21 +648,11 @@ $(document).ready(function(){
             $('#dados_conta').fadeIn();
         };
     }
+}
 
-    $('#t_mensalidade').on('change', function(){
-        var a = document.getElementsByName('tipo_mensalidade');
-        $('#dados_conta').fadeOut();
-        for( b in a){
-            if(a[b].checked && a[b].value == "debito"){
-                $('#dados_conta').fadeIn();
-            };
-        }
-    });
-
-    $("#me_parcelas").on('change', function(){
-        var me_total =  document.getElementById("me_total");
-        var valor_me_parcela =  document.getElementById("valor_me_parcela");
-        valor_me_parcela.value =( Number(me_total.value.replace(",","."))/this.value).toFixed(2);
-    });
-
-});
+function fn_e(){
+    var me_total =  document.getElementById("me_total");
+    var me_parcelas =  document.getElementById("me_parcelas");
+    var valor_me_parcela =  document.getElementById("valor_me_parcela");
+    valor_me_parcela.value =  Number(me_total.value.replace(",",".")) / Number(me_parcelas.value).toFixed(2);
+}
