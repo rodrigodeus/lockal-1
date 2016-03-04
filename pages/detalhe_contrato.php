@@ -7,18 +7,13 @@ $sql = "SELECT a.*,b.apelido_fantasia nome_parceiro,
         c.codigo cod_cliente, c.apelido_fantasia, c.nome_razao,c.cpf_cnpj, c.rg_insc_est
         FROM contratos a
         LEFT JOIN parceiros b on b.codigo=a.cod_parceiro
-        JOIN clientes c on c.codigo=a.cod_cliente
+        LEFT JOIN clientes c on c.codigo=a.cod_cliente
         WHERE a.codigo=" . $_GET['codigo'];
-echo $sql;
 $bd->query($sql);
 $resposta = $bd->getResult("array");
 
 if ($resposta) {
     extract($resposta[0]);
-    echo "<pre>";
-    print_r($resposta[0]);
-    echo "</pre>";
-
 }
 ?>
 
@@ -459,42 +454,113 @@ include_once "head.php";
                         </div>
                     </div>
 
-                    <!--Botoes-->
-                    <div class="row" id="">
-                        <button type="submit" class="btn btn-primary pull-right">Salvar</button>
-                    </div>
+                    <!--Dados das Parcelas-->
+                    <?php if ($_GET['codigo'] != 0){ ?>
 
-                </form>
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Parcelas</div>
+                            <div class="panel-body">
+
+                                <table class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th><strong>Vencimento</strong></th>
+                                            <th><strong>Parcela</strong></th>
+                                            <th><strong>Valor</strong></th>
+                                            <th><strong>Data Pagamento</strong></th>
+                                            <th><strong>Status</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $sql = "SELECT * FROM fin_receber WHERE ativo='true' AND cod_contrato = {$_GET['codigo']} ORDER BY numero_parcela";
+                                    $bd->query($sql);
+                                    $result = $bd->getResult("array");
+
+                                    foreach($result as $r ){
+                                        $class = "";
+                                        $status = "";
+                                        if(strtotime($r['data_baixa'])){
+                                            if (strtotime($r['data_baixa']) > strtotime($r['vencimento'])) {
+                                                $class = "warning";
+                                                $status = "Pago com atraso";
+                                            } else {
+                                                $class = "success";
+                                                $status = "Pago";
+                                            }
+                                        }elseif(strtotime(date('Y-m-d')) > strtotime($r['vencimento'])){
+                                                $class = "danger";
+                                                $status = "Falta pagamento";
+                                        }
+                                        ?>
+                                        <tr class=" <?=$class?>">
+                                            <td><input class="form-control" disabled type="date" value="<?=$r['vencimento']?>"></td>
+                                            <td><?=$r['numero_parcela']?> / <?=count($result)?></td>
+                                            <td><?=str_replace(".",",",$r['valor'])?></td>
+                                            <td><input class="form-control" type="date" name="data_baixa_<?=$r['codigo']?>" value="<?=$r['data_baixa']?>"></td>
+                                            <td><?=$status?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+            <?php } ?>
+
+            <!--Botoes-->
+            <div class="row" id="">
+                <button type="submit" class="btn btn-primary pull-right">Salvar</button>
             </div>
+
+            </form>
         </div>
+    </div>
 
-        <!-- /#wrapper -->
+    <!-- /#wrapper -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Selecione um Cliente</h4>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Selecione um Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-        <!-- Modal Loading-->
-        <div class="modal fade" id="modalLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
+    <!-- Modal Loading-->
+    <div class="modal fade" id="modalLoading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
 
-        <?php
-        include_once "scripts.php";
-        ?>
+    <?php
+    include_once "scripts.php";
+    ?>
 
 
 </body>

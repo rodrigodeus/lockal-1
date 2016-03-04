@@ -29,7 +29,7 @@ if(isset($_POST) && $_POST !=""){
             $bd->record_log("log_login",'update_clientes',$_POST['id']);
 
         if(isset($_GET['r'])){
-            header('Location: ../pages/detalhe_contrato.php?codigo='.$_POST['id']);
+            header('Location: ../pages/detalhe_contrato.php?codigo=0');
         }else{
             header('Location: ../pages/clientes.php');
         }
