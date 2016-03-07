@@ -1,4 +1,5 @@
 <?php
+
 require_once "../backend/first_all.php";
 
 $bd = new BD();
@@ -421,7 +422,6 @@ include_once "head.php";
                                             <select name="me_dia_vencimento" id="me_dia_vencimento"
                                                     class="form-control">
                                                 <?php
-
                                                 for ($i = 10; $i < 31; $i += 10) {
                                                     $selected = (@$me_dia_vencimento == $i) ? 'selected' : '';
                                                     echo "<option value='$i' $selected >$i</option>";
@@ -450,6 +450,16 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Observacoes-->
+                    <div class="row">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Observações</div>
+                            <div class="panel-body">
+                                <textarea name="obs" id="" class="form-control" rows="10"><?= @$obs ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -511,9 +521,30 @@ include_once "head.php";
                     </div>
             <?php } ?>
 
+            <!--Observacoes de cancelamento do contrato-->
+            <div class="row" id="campo_obs_canc" hidden>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Observações de cancelamento</div>
+                    <div class="panel-body">
+                        <h4>Por favor, justifique o motivo do cancelamento deste contrato</h4>
+                        <p class="text-muted">*Campo obrigatório</p>
+                        <textarea name="obs_cancelamento" id="obs_cancelamento" class="form-control" rows="10"><?= @$obs_cancelamento ?></textarea><br>
+                        <button type="button" onclick="fn_obs_voltar()"
+                                class="btn btn-primary">voltar
+                        </button>
+                        <button type="button" onclick="excluir_contrato(<?=$_GET['codigo']?>)"
+                                class="btn btn-xs btn-danger pull-right">Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!--Botoes-->
             <div class="row" id="">
-                <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+                <button type="submit" id="btn_salvar" class="btn btn-primary pull-right">Salvar</button>
+                <button type="button" onclick="fn_obs_can()" id="btn_cancelar"
+                        class="btn btn-xs btn-danger">Cancelar
+                </button>
             </div>
 
             </form>

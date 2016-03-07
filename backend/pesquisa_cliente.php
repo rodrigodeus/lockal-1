@@ -13,14 +13,17 @@ $bd = new BD();
 $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'clientes'";
 $bd->query($sql);
 $result = $bd->getResult('array');
-$where = "WHERE ";
-foreach($result as $r){
-    $where .= $r['COLUMN_NAME']." like '%".$_GET['p']."%' OR ";
-
+$where = "";
+if($result) {
+    foreach ($result as $r) {
+        $where .= $r['COLUMN_NAME'] . " like '%" . $_GET['p'] . "%' OR ";
+    }
+    $where = substr($where,0,-4);
 }
-$where = substr($where,0,-4);
 
-$sql = "SELECT codigo,nome_razao,cpf_cnpj FROM clientes $where";
+$where_1 = ($_SESSION['admin']=='true')?"WHERE 1=1 AND (":" WHERE cod_parceiro={$_SESSION['codigo']} AND (";
+
+$sql = "SELECT codigo,nome_razao,cpf_cnpj FROM clientes $where_1 $where )";
 $bd->query($sql);
 echo $bd->getResult('json');
 

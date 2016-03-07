@@ -16,8 +16,10 @@ if(isset($_POST) && $_POST !=""){
         $bd = new BD();
 
             $table = "clientes";
+            print_r($_SESSION);
             if($_POST['id']==0){
                 $dados['ativo'] = "true";
+                $dados['cod_parceiro'] = $_SESSION['codigo'];
                 $bd->insert($table,$dados);
                 $_POST['id'] = $bd->get("insert_id");
             }

@@ -49,6 +49,8 @@ include_once "head.php";
 
                         <?php
 
+                        $where = ($_SESSION['admin']=='true')?"":" AND a.cod_parceiro={$_SESSION['codigo']}";
+
                         $sql = "select a.codigo, a.data_instalacao,b.nome_razao cliente,a.cod_power,
                                 c.nome_razao parceiro,
                                concat(d.nome,' ',a.placa) veiculo,a.cor,a.ano_fabricacao ano, '' icone
@@ -56,12 +58,12 @@ include_once "head.php";
                                  left join clientes b on b.codigo=a.cod_cliente
                                 left join parceiros c on c.codigo=a.cod_parceiro
 
-                                left join veiculos  d on d.codigo=a.cod_veiculo";
+                                left join veiculos  d on d.codigo=a.cod_veiculo WHERE a.ativo='true' $where";
 
 
                         $bd->query($sql);
                         $resposta =  $bd->getResult();
-                        if (mysql_num_rows($resposta) > 0) {
+                        if ($resposta) {
                             $out = "";
                             while ($row = mysql_fetch_row($resposta)) {
                                 $out .= "<tr>";

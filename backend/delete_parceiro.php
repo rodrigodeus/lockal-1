@@ -11,7 +11,7 @@ include_once "first_all.php";
 $bd = new BD();
 
     $table = "parceiros";
-    $dados['ativo'] =  "\"false\"";
+    $dados['ativo'] =  "false";
     $where = "codigo=".$_GET['codigo'];
     $bd->update($table,$dados,$where);
     $bd->record_log("log_login",'delete_parceiro',$_GET['codigo']);

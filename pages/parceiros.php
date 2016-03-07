@@ -48,7 +48,7 @@ include_once "head.php";
 
                         $bd->query($sql);
                         $resposta =  $bd->getResult();
-                        if (mysql_num_rows($resposta) > 0) {
+                        if ($resposta) {
                             $out = "";
                             while ($row = mysql_fetch_row($resposta)) {
                                 $out .= "<tr>";

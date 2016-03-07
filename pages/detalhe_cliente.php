@@ -3,7 +3,11 @@ require_once "../backend/first_all.php";
 
 $bd = new BD();
 
-$sql = "SELECT a.*,b.apelido_fantasia nome_parceiro, b.codigo cod_parceiro FROM clientes a left join parceiros b on b.codigo=a.cod_parceiro WHERE a.codigo=" . $_GET['codigo'];
+$sql = "SELECT a.*,b.apelido_fantasia nome_parceiro
+FROM clientes a
+JOIN parceiros b ON b.codigo=a.cod_parceiro
+WHERE a.ativo='true'
+AND a.codigo=" . $_GET['codigo'];
 $bd->query($sql);
 $resposta = $bd->getResult("array");
 
@@ -22,6 +26,7 @@ include_once "head.php";
 <body>
 
 <div id="wrapper">
+    <?php print_r($resposta[0]); ?>
 
     <?php
     include_once "nav.php";
@@ -199,6 +204,7 @@ include_once "head.php";
                                     </div>
                                 </div>
                                 <br>
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="contato_tel_1">Fone 1</label>
@@ -222,6 +228,125 @@ include_once "head.php";
                     </div>
                 </div>
             </div>
+
+            <!--Contratos-->
+            <?php
+            $sql = "SELECT a.codigo, a.data_instalacao, a.ativo,a.data_vencimento,
+                                b.nome nome_veiculo, c.nome nome_marca ,
+                                d.nome_razao nome_parceiro
+                                FROM contratos a
+                                JOIN veiculos b ON b.codigo = a.cod_veiculo
+                                JOIN marcas c ON c.codigo = a.cod_fabricante
+                                JOIN parceiros d ON d.codigo = a.cod_parceiro
+                                WHERE cod_cliente=" . $_GET['codigo'];
+            $bd->query($sql);
+            $result = $bd->getResult('array');
+            if ($result) {
+                ?>
+                <div class="row">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Contratos</div>
+                        <div class="panel-body">
+                            <div>
+
+                                <div class="accordion" id="accordion1">
+                                    <div class="accordion-group">
+                                        <?php
+                                        $i = 0;
+                                        foreach ($result as $r) {
+                                            $i++;
+                                            ?>
+                                            <div class="accordion-heading">
+
+                                                <table class="table table-striped data_table" style="width:100%">
+                                                    <tr>
+                                                        <td><a class="accordion-toggle" data-toggle="collapse"
+                                                               data-parent="#accordion1" href="#collapse<?= $i ?>"
+                                                               style="text-decoration: none"><i
+                                                                    class="fa fa-plus-square"></i></a></td>
+                                                        <td><strong>Contrato:</strong><?= $r['codigo'] ?></td>
+                                                        <td>
+                                                            <strong>Aquisição:</strong><?= date('d/m/Y', strtotime($r['data_instalacao'])); ?>
+                                                        </td>
+                                                        <td><strong>Marca: </strong><?= $r['nome_marca'] ?></td>
+                                                        <td><strong>Veículo: </strong><?= $r['nome_veiculo'] ?></td>
+                                                        <td><strong>Parceiro:</strong><?= $r['nome_parceiro'] ?>
+                                                        <td><strong>Status:</strong>
+                                                            <?php
+                                                            if ($r['ativo'] == 'true') {
+                                                                if (strtotime($r['data_vencimento']) > strtotime(date('Y-m-d'))) {
+                                                                    echo "Ativo";
+                                                                } else {
+                                                                    echo "Finalizado";
+                                                                }
+                                                            } else {
+                                                                echo "Cancelado";
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                        <td><strong>Abrir:</strong><a class="btn btn-primary btn-xs"
+                                                                                      href="detalhe_contrato.php?codigo=<?= $r['codigo']; ?>"><i
+                                                                    class="fa fa-share"></i></a>
+                                                </table>
+                                            </div>
+                                            <div id="collapse<?= $i ?>" class="accordion-body collapse">
+                                                <div class="accordion-inner">
+                                                    <table class="table table-striped data_table" style="width:100%">
+                                                        <tr>
+                                                            <th><strong>Vencimento</strong></th>
+                                                            <th><strong>Parcela</strong></th>
+                                                            <th><strong>Valor</strong></th>
+                                                            <th><strong>Data Pagamento</strong></th>
+                                                            <th><strong>Pagamento</strong></th>
+                                                        </tr>
+                                                        <?php
+                                                        $sql_1 = "SELECT * FROM fin_receber WHERE ativo='true' AND cod_contrato = {$r['codigo']} ORDER BY numero_parcela";
+                                                        $bd->query($sql_1);
+                                                        $result_1 = $bd->getResult("array");
+
+                                                        if ($result_1) {
+
+                                                            foreach ($result_1 as $r_1) {
+                                                                $class = "";
+                                                                $status = "";
+                                                                if (strtotime($r_1['data_baixa'])) {
+                                                                    if (strtotime($r_1['data_baixa']) > strtotime($r_1['vencimento'])) {
+                                                                        $class = "warning";
+                                                                        $status = "Pago com atraso";
+                                                                    } else {
+                                                                        $class = "success";
+                                                                        $status = "Pago";
+                                                                    }
+                                                                } elseif (strtotime(date('Y-m-d')) > strtotime($r_1['vencimento'])) {
+                                                                    $class = "danger";
+                                                                    $status = "Falta pagamento";
+                                                                }
+                                                                ?>
+                                                                <tr class="<?= $class ?>">
+                                                                    <td><?= date('d/m/Y', strtotime($r_1['vencimento'])); ?></td>
+                                                                    <td><?= $r_1['numero_parcela'] ?>
+                                                                        / <?= count($result_1) ?></td>
+                                                                    <td><?= str_replace(".", ",", $r_1['valor']) ?></td>
+                                                                    <td><?= (date('d/m/Y', strtotime($r_1['data_baixa'])) == "01/01/1970") ? " - " : date('d/m/Y', strtotime($r_1['data_baixa'])); ?></td>
+                                                                    <td><?= $status ?></td>
+                                                                </tr>
+                                                            <?php }
+                                                        }
+                                                        ?>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        <?php }; ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php }; ?>
+
             <!--Botoes-->
             <div class="row">
                 <div class="row">
@@ -235,129 +360,28 @@ include_once "head.php";
                 </div>
             </div>
             <br>
-            <!--localizaçãp-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Contratações</div>
-                        <div class="panel-body">
-                            <div>
-                                <div class="accordion" id="accordion1">
-                                    <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                            <a class="accordion-toggle" data-toggle="collapse"
-                                               data-parent="#accordion1" href="#collapseOne"
-                                               style="text-decoration: none">
-                                                <table class="table table-striped data_table" style="width:100%">
-                                                    <tr>
-                                                        <td><i class="fa fa-plus-square"></i></td>
-                                                        <td><strong>Contrato:</strong>1001</td>
-                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
-                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
-                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
-                                                        <td><strong>Status: </strong>Ativo</td>
-                                                        <td><i class="fa fa-print"
-                                                               title="Imprimir dados deste contrato"></i>
 
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </div>
-                                        <div id="collapseOne" class="accordion-body collapse in">
-                                            <div class="accordion-inner">
-                                                <table class="table table-striped data_table" style="width:100%">
-
-                                                    <tr>
-                                                        <th><strong>Vencimento</strong></th>
-                                                        <th><strong>Descrição</strong></th>
-                                                        <th><strong>Valor</strong></th>
-                                                        <th><strong>Data Pagamento</strong></th>
-                                                        <th><strong>Status</strong></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2015</td>
-                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                        <td>124,55</td>
-                                                        <td>02/03/2015</td>
-                                                        <td>Pago</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2015</td>
-                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                        <td>124,55</td>
-                                                        <td>02/03/2015</td>
-                                                        <td>Pago</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion" id="accordion2">
-                                    <div class="accordion-group">
-                                        <div class="accordion-heading">
-                                            <a class="accordion-toggle" data-toggle="collapse"
-                                               data-parent="#accordion2" href="#collapseOne2"
-                                               style="text-decoration: none">
-                                                <table class="table table-striped data_table" style="width:100%">
-                                                    <tr>
-                                                        <td><i class="fa fa-plus-square"></i></td>
-                                                        <td><strong>Contrato:</strong>1001</td>
-                                                        <td><strong>Aquisição:</strong> 02/05/2015</td>
-                                                        <td><strong>Veículo: </strong>BMW X5 DME1345</td>
-                                                        <td><strong>Parceiro:</strong>Mota Auto Elétrico</td>
-                                                        <td><strong>Status: </strong>Ativo</td>
-                                                        <td><i class="fa fa-print"
-                                                               title="Imprimir dados deste contrato"></i>
-
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </div>
-                                        <div id="collapseOne2" class="accordion-body collapse in">
-                                            <div class="accordion-inner">
-                                                <table class="table table-striped data_table" style="width:100%">
-
-                                                    <tr>
-                                                        <th><strong>Vencimento</strong></th>
-                                                        <th><strong>Descrição</strong></th>
-                                                        <th><strong>Valor</strong></th>
-                                                        <th><strong>Data Pagamento</strong></th>
-                                                        <th><strong>Status</strong></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2015</td>
-                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                        <td>124,55</td>
-                                                        <td>02/03/2015</td>
-                                                        <td>Pago</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>01/02/2015</td>
-                                                        <td>Rastreador XYZ parcela 1/3</td>
-                                                        <td>124,55</td>
-                                                        <td>02/03/2015</td>
-                                                        <td>Pago</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </form>
-</div>
-<!-- /#wrapper -->
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- /#wrapper -->
 
 
-<?php
-include_once "scripts.php";
-?>
+    <?php
+    include_once "scripts.php";
+    ?>
 
 
 </body>

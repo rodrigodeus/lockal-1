@@ -38,21 +38,24 @@ include_once "head.php";
                         <th>Fone 2</th>
                         <th>Parceiro</th>
                         <th>
-
                             <div class='btn-group btn-group-xs' role='group'><a href='detalhe_cliente.php?codigo=0' class='btn btn-primary'  title='Cadastrar novo cliente'><span class='glyphicon glyphicon-plus'></span></a></div>
-
                         </th>
                         </thead>
                         <tbody>
 
                         <?php
 
+
+                        $where = ($_SESSION['admin']=='true')?"":" AND a.cod_parceiro={$_SESSION['codigo']}";
+
                         $sql = "SELECT codigo id, nome_razao,apelido_fantasia,cpf_cnpj,tel_1,tel_2,
-                              if(a.cod_parceiro=0,'Lockal',(select apelido_fantasia from parceiros a where codigo=a.cod_parceiro))parceiro,' ' icon from clientes a WHERE a.ativo='true'";
+                              if(a.cod_parceiro=0,'Lockal',(select apelido_fantasia from parceiros a
+                              where codigo=a.cod_parceiro))parceiro,' ' icon from clientes a
+                              WHERE a.ativo='true' $where";
 
                         $bd->query($sql);
                         $resposta =  $bd->getResult();
-                        if (mysql_num_rows($resposta) > 0) {
+                        if ($resposta) {
                             $out = "";
                             while ($row = mysql_fetch_row($resposta)) {
                                 $out .= "<tr>";

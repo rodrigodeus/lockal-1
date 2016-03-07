@@ -445,6 +445,30 @@ function excluir_usuario(id) {
         location.href = "../backend/delete_usuario.php?codigo=" + id;
     }
 }
+function excluir_contrato(id) {
+
+    var a = document.getElementById("obs_cancelamento").value;
+
+    if(a.length<20){
+        alert("A justificativa deve ter mais que 20 (vinte) caracteres!");
+    }else{
+        var d = confirm("Tem certeza que deseja cancelar esse CONTRATO?");
+    }
+    if (d) {
+        location.href = "../backend/delete_contrato.php?codigo=" + id+"&obs_cancelamento="+a;
+    }
+}
+function fn_obs_can() {
+    $('#campo_obs_canc').fadeToggle();
+    $('#btn_salvar').fadeToggle();
+    $('#btn_cancelar').fadeToggle();
+}
+
+function fn_obs_voltar() {
+    $('#campo_obs_canc').fadeToggle();
+    $('#btn_salvar').fadeToggle();
+    $('#btn_cancelar').fadeToggle();
+}
 
 $('#ipt_final, #ipt_inicial').on('change', function () {
     if ($('#ipt_final, #ipt_inicial').val() != "") {

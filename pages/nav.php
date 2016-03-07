@@ -31,8 +31,9 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form" >
-                        <input type="text" class="form-control" placeholder="Busca..." id="pesquisa_1" onkeypress="enter_geral()">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Busca..." id="pesquisa_1"
+                               onkeypress="enter_geral()">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" onclick="pesquisageral()">
                                     <i class="fa fa-search"></i>
@@ -44,31 +45,29 @@
                 <li>
                     <a href="clientes.php"><i class="fa fa-car fa-fw"></i> Clientes</a>
                 </li>
-                <li>
-                    <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
-                </li>
+                <?php
+                if ($_SESSION['admin'] == 'true') { ?>
+                    <li>
+                        <a href="parceiros.php"><i class="fa fa-users fa-fw"></i> Parceiros</a>
+                    </li>
+                <?php } ?>
                 <li>
                     <a href="contratos.php"><i class="fa fa-file-text-o fa-fw"></i> Contratos</a>
-                <?php
-                    if($_SESSION['admin']=='true'){
-                        echo "<li><a href='geral.php'><i class='fa fa-cogs fa-fw'></i> Configuração</a></li>";
-                        echo "<li><a href='usuarios.php'><i class='fa fa-user fa-fw'></i> Usuários</a></li>";
-                    }
-                ?>
+                </li>
 
                 <li>
                     <a href="#"><i class="fa fa-money fa-fw"></i> Financeiro<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href='#'>À Receber</a></li>
-                        <li><a href='#'>À Pagar</a></li>
+                        <li><a href='#'> À Receber </a></li>
+                        <li><a href='#'> À Pagar </a></li>
                     </ul>
-                    <!-- /.nav-second-level -->
+                    <!-- /.nav - second - level-->
                 </li>
 
-</ul>
+            </ul>
         </div>
-        <!-- /.sidebar-collapse -->
+        <!-- /.sidebar - collapse-->
     </div>
-    <!-- /.navbar-static-side -->
+    <!-- /.navbar -static-side-->
 </nav>
 

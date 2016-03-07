@@ -11,7 +11,7 @@ include_once "first_all.php";
 
 if(isset($_POST) && $_POST !=""){
 
-
+        print_r($_POST);
         $bd = new BD();
 
             $table = "parceiros";
@@ -22,6 +22,7 @@ if(isset($_POST) && $_POST !=""){
             }
 
             $dados = $_POST;
+            $dados['admin'] = (isset($_POST['admin']))?'true':'false';
             unset($dados['id']);
             $where = "codigo={$_POST['id']}";
             $bd->update($table,$dados,$where);

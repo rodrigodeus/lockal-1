@@ -10,7 +10,7 @@ class Session {
             exit;
         };
         $bd = new BD();
-        $sql = "SELECT codigo, email, admin FROM usuarios WHERE email='$user' AND senha='$password' AND ativo=true";
+        $sql = "SELECT codigo, email, admin FROM parceiros WHERE email='$user' AND senha='$password' AND ativo=true";
         $bd->query($sql);
         if($bd->getLinha()){
             if(session_id() == '' || !isset($_SESSION)) {

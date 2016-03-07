@@ -9,11 +9,12 @@
 include_once "first_all.php";
 
 $bd = new BD();
-
-    $table = "clientes";
-    $dados['ativo'] =  "\"false\"";
+    print_r($_GET);
+    $table = "contratos";
+    $dados['ativo'] =  "false";
+    $dados['obs_cancelamento'] =  $_GET['obs_cancelamento'];
     $where = "codigo=".$_GET['codigo'];
     $bd->update($table,$dados,$where);
-    $bd->record_log("log_login",'delete_cliente',$_GET['codigo']);
+    $bd->record_log("log_login",'delete_contrato',$_GET['codigo']);
 
-header('Location: ../pages/clientes.php');
+header('Location: ../pages/contratos.php');
