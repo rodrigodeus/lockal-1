@@ -25,8 +25,8 @@ if (isset($_POST) && $_POST != "") {
             'ativo'=>'true'
         );
 
-        $da  = date('Y-m-1', strtotime($_POST['data_instalacao']));
-        $da = date('Y-m-d', strtotime("+1 month", strtotime($da)));
+        $da = date('Y-m-d', strtotime($_POST['me_dia_vencimento']));
+        $db = date('d', strtotime($da));
 
         for($i=1;$i<13;$i++){
 
@@ -34,27 +34,37 @@ if (isset($_POST) && $_POST != "") {
                 $dados_1['ativo']='false';
                 $dados_1['valor']= 0;
             }
+
             $dados_1['numero_parcela']=$i;
 
-            if($_POST['me_dia_vencimento']>28){
-                $da = date('Y-m-d', strtotime("+1 month", strtotime($da)));
-                $df = date('d', strtotime("-1 day", strtotime($da)));
-                if($df > $_POST['me_dia_vencimento']){
-                    $r = date('Y-m-', strtotime("-1 day", strtotime($da))).$_POST['me_dia_vencimento'];
-                }else{
-                    $r = date('Y-m-d', strtotime("-1 day", strtotime($da)));
-                }
+            $dm = date('m', strtotime($da));
+            $dd = date('d', strtotime($da));
+
+            if( $dm  == 2 && $dd >= 28 ){
+
+                $d1 = date('Y-m-1', strtotime($da));
+                $d2 = date('Y-m-d', strtotime("+1 month", strtotime($d1)));
+                $r = date('Y-m-d', strtotime("-1 day", strtotime($d2)));
+                $da = $d2;
+                $da = date('Y-m-', strtotime($d2)).$db;
+
             }else{
-                $da = date('Y-m-d', strtotime("+1 month", strtotime($da)));
-                $r = date('Y-m-', strtotime("-1 day", strtotime($da))).$_POST['me_dia_vencimento'];
+                $r = date('Y-m-d', strtotime($da));
+                if ($dm == 1 && $dd >= 28) {
+                    $d1 = date('Y-m-1', strtotime($da));
+                    $d2 = date('Y-m-d', strtotime("+2 month", strtotime($d1)));
+                    $da = date('Y-m-d', strtotime("-1 day", strtotime($d2)));
+                }else{
+                    $da = date('Y-m-d', strtotime("+1 month", strtotime($da)));
+                }
             }
             $dados_1['vencimento'] = $r;
             $bd->insert($table_1, $dados_1);
+
         }
     }
 
     //UPDATE - fin_receber
-    print_r($_POST);
     foreach (array_keys($_POST) as $k) {
         if (preg_match('/^data_baixa_/', $k)) {
             echo $k;

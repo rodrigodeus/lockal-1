@@ -418,15 +418,10 @@ include_once "head.php";
                                                    placeholder="0,00" disabled>
                                         </div>
                                         <div class="col-lg-2">
-                                            <label for="me_dia_vencimento">Dia do vencimento</label>
+                                            <label for="me_dia_vencimento">Dia 1&ordm; vencimento</label>
                                             <select name="me_dia_vencimento" id="me_dia_vencimento"
-                                                    class="form-control">
-                                                <?php
-                                                for ($i = 10; $i < 31; $i += 10) {
-                                                    $selected = (@$me_dia_vencimento == $i) ? 'selected' : '';
-                                                    echo "<option value='$i' $selected >$i</option>";
-                                                }
-                                                ?>
+                                                    class="form-control"
+                                                data-v = "<?=@$me_dia_vencimento?>">
                                             </select>
                                         </div>
                                     </div>

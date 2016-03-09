@@ -614,6 +614,9 @@ $(document).ready(function(){
     fn_d();
     fn_e();
 
+    $('#data_instalacao').on('change', function() {
+        fn_f();
+    });
 
 });
 
@@ -647,6 +650,7 @@ function fn_a(){
     fp_total.value = total.toFixed(2);
     fn_b();
     fn_e();
+    fn_f();
 }
 function fn_b(){
     var fp_cartao_credito =  document.getElementById("fp_cartao_credito");
@@ -679,4 +683,127 @@ function fn_e(){
     var me_parcelas =  document.getElementById("me_parcelas");
     var valor_me_parcela =  document.getElementById("valor_me_parcela");
     valor_me_parcela.value =  Number(me_total.value.replace(",",".")) / Number(me_parcelas.value).toFixed(2);
+}
+
+function fn_f(){
+    var data_instalacao =  document.getElementById("data_instalacao");
+    var me_dia_vencimento =  document.getElementById("me_dia_vencimento");
+    var y,z;
+    var d = new Date(data_instalacao.value);
+
+    var dia = d.getUTCDate();
+    var datas = [];
+
+    if(dia<10){
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-20");
+
+        if(d.getUTCMonth()==1){
+            var x = new Date(d.getUTCFullYear(), (((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1)),0);
+            x = x.getUTCDate();
+            console.log(x);
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+((((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1)))+"-"+x);
+            }else{
+               datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+        }
+
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-20");
+
+    }else if(dia<20){
+
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-20");
+
+        if(d.getUTCMonth()==1){
+            var x = new Date(d.getUTCFullYear(), (((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1)),0);
+            x = x.getUTCDate();
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-"+x);
+            }else{
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+        }
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-20");
+
+        if((d.getUTCMonth()+1)==1){
+            var x = new Date(d.getUTCFullYear(),(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)),0);
+            x = x.getUTCDate();
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-"+x);
+            }else{
+                datas.push(d.getUTCFullYear()+"-"+((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-30");
+        }
+
+    }else if(dia<30){
+
+        if(d.getUTCMonth()==1){
+            var x = new Date(d.getUTCFullYear(), (((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)),0);
+            x = x.getUTCDate();
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-"+x);
+            }else{
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+1)>12)?'01':(d.getUTCMonth()+1))+"-30");
+        }
+
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-20");
+
+        if((d.getUTCMonth()+1)==1){
+            var x = new Date(d.getUTCFullYear(),(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)),0);
+            x = x.getUTCDate();
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-"+x);
+            }else{
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-30");
+        }
+
+    }else{
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-20");
+
+        if(d.getUTCMonth()+1==1){
+            var x = new Date(d.getUTCFullYear(), (((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)),0);
+            x = x.getUTCDate();
+            if(x<30){
+                datas.push(d.getUTCFullYear()+"-"+((((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2)))+"-"+x);
+            }else{
+                datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-30");
+            }
+        }else{
+            datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+2)>12)?'01':(d.getUTCMonth()+2))+"-30");
+        }
+
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+3)>12)?'01':(d.getUTCMonth()+3))+"-10");
+        datas.push(d.getUTCFullYear()+"-"+(((d.getUTCMonth()+3)>12)?'01':(d.getUTCMonth()+3))+"-20");
+    }
+
+    z = "";
+
+    var v = me_dia_vencimento.getAttribute("data-v");
+    v = new Date(v);
+
+    var selected;
+
+    for(var i=0;i<datas.length;i++){
+        y =  new Date(datas[i]);
+        selected = (y.getTime()=== v.getTime())?'selected':"";
+        z += "<option value='"+datas[i]+"' "+selected+">"+ y.getUTCDate()+"/"+ (y.getMonth()+1)+"/"+ y.getUTCFullYear()+"</option>";
+    }
+    me_dia_vencimento.innerHTML = z;
 }
