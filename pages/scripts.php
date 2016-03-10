@@ -27,8 +27,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-<!-- My Functions -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
 <script src="../dist/js/functions.js"></script>
 

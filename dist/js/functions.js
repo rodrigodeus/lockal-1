@@ -134,66 +134,7 @@ function get_coords(adress) {
     xmlhttp.send();
 }
 
-function initialize() {
 
-
-    var myLatlng = new google.maps.LatLng(lat, lng); // Change your location Latitude and Longitude
-    var mapOptions = {
-        zoom: 16,
-        center: myLatlng
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    //retorna as cordenadas do endereço em um json
-    //http://maps.google.com/maps/api/geocode/json?address=Avenida%20Rio%20Branco,%20Rio%20de%20Janeiro&sensor=false
-
-
-// Disabled Map Scroll in Contact Page
-    map.setOptions({'scrollwheel': false});
-
-// Black and White style for Google Map
-    var styles = [
-        {
-            stylers: [
-                {saturation: 0}
-            ]
-        }, {
-            featureType: "road",
-            elementType: "geometry",
-            stylers: [
-                {lightness: -0},
-                {visibility: "simplified"}
-            ]
-        }, {
-            featureType: "road",
-            elementType: "labels"
-        }
-    ];
-    map.setOptions({styles: styles});
-
-// Google Map Maker
-
-    // var IconeMadeira = '../dist/img/logo_tury/favicon.ico';
-
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: "Localização"
-        // icon: IconeMadeira
-    });
-}
-
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-
-//Pegar parametros da URL
-var getQueryString = function (field, url) {
-    var href = url ? url : window.location.href;
-    var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
-    var string = reg.exec(href);
-    return string ? string[1] : null;
-};
 
 
 function add_video() {

@@ -35,6 +35,7 @@ include_once "head.php";
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
+                <h3 class="text-right"> # <?= $_GET['codigo']; ?></h3>
                 <form action="../backend/update_contratos.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $_GET['codigo']; ?>">
                     <br>
@@ -405,7 +406,7 @@ include_once "head.php";
                                                     class="form-control">
                                                 <?php
                                                 for ($i = 1; $i < 13; $i++) {
-                                                    $selected = (@$fp_parcelas_cartao == $i) ? 'selected' : '';
+                                                    $selected = (@$me_parcelas == $i) ? 'selected' : '';
                                                     echo "<option value='$i' $selected >$i</option>";
                                                 }
                                                 ?>
@@ -472,7 +473,7 @@ include_once "head.php";
                                         <tr>
                                             <th><strong>Vencimento</strong></th>
                                             <th><strong>Parcela</strong></th>
-                                            <th><strong>Valor</strong></th>
+                                            <th><strong>Valor R$</strong></th>
                                             <th><strong>Data Pagamento</strong></th>
                                             <th><strong>Status</strong></th>
                                         </tr>
@@ -486,7 +487,9 @@ include_once "head.php";
                                     foreach($result as $r ){
                                         $class = "";
                                         $status = "";
+
                                         if(strtotime($r['data_baixa'])){
+
                                             if (strtotime($r['data_baixa']) > strtotime($r['vencimento'])) {
                                                 $class = "warning";
                                                 $status = "Pago com atraso";
@@ -525,7 +528,7 @@ include_once "head.php";
                         <p class="text-muted">*Campo obrigatório</p>
                         <textarea name="obs_cancelamento" id="obs_cancelamento" class="form-control" rows="10"><?= @$obs_cancelamento ?></textarea><br>
                         <button type="button" onclick="fn_obs_voltar()"
-                                class="btn btn-primary">voltar
+                                class="btn btn-primary">Voltar
                         </button>
                         <button type="button" onclick="excluir_contrato(<?=$_GET['codigo']?>)"
                                 class="btn btn-xs btn-danger pull-right">Cancelar
