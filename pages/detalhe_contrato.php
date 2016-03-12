@@ -36,7 +36,7 @@ include_once "head.php";
         <div class="container-fluid">
             <div class="row">
                 <h3 class="text-right"> # <?= $_GET['codigo']; ?></h3>
-                <form action="../backend/update_contratos.php" method="post" enctype="multipart/form-data">
+                <form id="form_contrato" action="../backend/update_contratos.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $_GET['codigo']; ?>">
                     <br>
                     <!--Cliente-->
@@ -279,28 +279,28 @@ include_once "head.php";
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <label for="fp_dinheiro">Dinheiro</label>
-                                        <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control"
+                                        <input type="text" id="fp_dinheiro" name="fp_dinheiro" class="form-control money"
                                                placeholder="0,00" value="<?= @$fp_dinheiro ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_boleto">Boleto</label>
-                                        <input type="text" id="fp_boleto" name="fp_boleto" class="form-control"
+                                        <input type="text" id="fp_boleto" name="fp_boleto" class="form-control money"
                                                placeholder="0,00" value="<?= @$fp_boleto ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_deposito">Depósito</label>
-                                        <input type="text" id="fp_deposito" name="fp_deposito" class="form-control"
+                                        <input type="text" id="fp_deposito" name="fp_deposito" class="form-control money"
                                                placeholder="0,00" value="<?= @$fp_deposito ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cheque">Cheque</label>
-                                        <input type="text" id="fp_cheque" name="fp_cheque" class="form-control"
+                                        <input type="text" id="fp_cheque" name="fp_cheque" class="form-control money"
                                                placeholder="0,00" value="<?= @$fp_cheque ?>">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_debito">Cartão Débito</label>
                                         <input type="text" id="fp_cartao_debito" name="fp_cartao_debito"
-                                               class="form-control" placeholder="0,00"
+                                               class="form-control money" placeholder="0,00"
                                                value="<?= @$fp_cartao_debito ?>">
                                     </div>
                                 </div>
@@ -309,7 +309,7 @@ include_once "head.php";
                                     <div class="col-lg-2">
                                         <label for="fp_cartao_credito">Cartão Crédito</label>
                                         <input type="text" id="fp_cartao_credito" name="fp_cartao_credito"
-                                               class="form-control" placeholder="0,00"
+                                               class="form-control money" placeholder="0,00"
                                                value="<?= @$fp_cartao_credito ?>">
                                     </div>
                                     <div class="col-lg-2">
@@ -325,12 +325,12 @@ include_once "head.php";
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="valor_parcela">Valor da parcela</label>
-                                        <input type="text" id="valor_parcela" name="valor_parcela" class="form-control"
+                                        <input type="text" id="valor_parcela" name="valor_parcela" class="form-control money"
                                                placeholder="0,00" disabled value="">
                                     </div>
                                     <div class="col-lg-offset-2 col-lg-2">
                                         <label for="fp_total">TOTAL</label>
-                                        <input type="text" id="fp_total" name="fp_total" class="form-control"
+                                        <input type="text" id="fp_total" name="fp_total" class="form-control money"
                                                placeholder="0,00" disabled>
                                     </div>
                                 </div>
@@ -397,7 +397,7 @@ include_once "head.php";
                                         </div>
                                         <div class="col-lg-2">
                                             <label for="me_total">Total do Contrato</label>
-                                            <input type="text" id="me_total" name="me_total" class="form-control"
+                                            <input type="text" id="me_total" name="me_total" class="form-control money"
                                                    placeholder="0,00" value="<?= @$me_total ?>">
                                         </div>
                                         <div class="col-lg-2">
@@ -415,15 +415,14 @@ include_once "head.php";
                                         <div class="col-lg-2">
                                             <label for="valor_me_parcela">Valor da parcela</label>
                                             <input type="text" id="valor_me_parcela" name="valor_me_parcela"
-                                                   class="form-control"
+                                                   class="form-control money"
                                                    placeholder="0,00" disabled>
                                         </div>
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-3">
                                             <label for="me_dia_vencimento">Dia 1&ordm; vencimento</label>
-                                            <select name="me_dia_vencimento" id="me_dia_vencimento"
-                                                    class="form-control"
-                                                data-v = "<?=@$me_dia_vencimento?>">
-                                            </select>
+                                            <input type="date" name="me_dia_vencimento" id="me_dia_vencimento"
+                                                   class="form-control" value="<?=@$me_dia_vencimento?>">
+                                            <p class="text-muted">*Os dias devem ser 10, 20 ou 30 de cada mês</p>
                                         </div>
                                     </div>
                                 </div>
@@ -475,16 +474,17 @@ include_once "head.php";
                                             <th><strong>Parcela</strong></th>
                                             <th><strong>Valor R$</strong></th>
                                             <th><strong>Data Pagamento</strong></th>
+                                            <th><strong>Descrição</strong></th>
                                             <th><strong>Status</strong></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM fin_receber WHERE ativo='true' AND cod_contrato = {$_GET['codigo']} ORDER BY numero_parcela";
+                                    $sql = "SELECT * FROM fin_receber WHERE ativo='true' AND cod_contrato = {$_GET['codigo']} ORDER BY vencimento";
                                     $bd->query($sql);
                                     $result = $bd->getResult("array");
-
                                     foreach($result as $r ){
+
                                         $class = "";
                                         $status = "";
 
@@ -503,10 +503,23 @@ include_once "head.php";
                                         }
                                         ?>
                                         <tr class=" <?=$class?>">
-                                            <td><input class="form-control" disabled type="date" value="<?=$r['vencimento']?>"></td>
-                                            <td><?=$r['numero_parcela']?> / <?=count($result)?></td>
-                                            <td><?=str_replace(".",",",$r['valor'])?></td>
+                                            <?php
+
+
+                                            ?>
+                                            <td><input class="form-control" name="data_vencimento_<?=$r['codigo']?>" type="date" value="<?=$r['vencimento']?>"></td>
+                                            <td>
+                                                <?php
+                                                if($r['numero_parcela']<=@$me_parcelas){
+                                                    echo $r['numero_parcela']."/".@$me_parcelas;
+                                                }else{
+                                                    echo "-";
+                                                }
+                                            ?>
+                                            </td>
+                                            <td><input class="form-control money" id="xcv" type="text" name="data_valor_<?=$r['codigo']?>" value="<?=str_replace(".",",",$r['valor'])?>"></td>
                                             <td><input class="form-control" type="date" name="data_baixa_<?=$r['codigo']?>" value="<?=$r['data_baixa']?>"></td>
+                                            <td><input class="form-control" type="text" maxlength="255" name="data_descricao_<?=$r['codigo']?>" value="<?=$r['descricao']?>"></td>
                                             <td><?=$status?></td>
                                         </tr>
                                     <?php } ?>

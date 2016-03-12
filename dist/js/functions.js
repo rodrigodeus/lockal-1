@@ -328,11 +328,7 @@ function descricao_familia(cod_familia, cod_produto, op, cod_texto) {
 
         }
     };
-
-
     xhttp.open("GET", "../backend/altera_descricao.php?cod_produto=" + cod_produto + "&cod_familia=" + cod_familia + "&tipo_op=" + op + "&cod_texto=" + cod_texto, true);
-
-
     xhttp.send();
 
 }
@@ -482,6 +478,7 @@ function fn_pesquisa_cliente() {
     xmlhttp.send();
 }
 $(document).ready(function(){
+
     $("#cod_fabricante").on('change',function(){
         $("#modalLoading").modal("show");
         $.ajax({
@@ -535,10 +532,7 @@ $(document).ready(function(){
     });
 
     $('#mensalidade').on('keyup', function(){
-        var me_total =  document.getElementById("me_total");
-        var valor_me_parcela =  document.getElementById("valor_me_parcela");
-        var me_parcelas =  document.getElementById("me_parcelas");
-        valor_me_parcela.value= (Number(me_total.value.replace(",",".")) / Number(me_parcelas.value)).toFixed(2);
+        fn_e();
     });
 
     $('#t_mensalidade').on('change', function(){
@@ -549,15 +543,59 @@ $(document).ready(function(){
         fn_e();
     });
 
+
+
+    $('#me_dia_vencimento').on('change', function() {
+        var d = new Date(this.value);
+        var e = this.value;
+        switch (d.getUTCDate()){
+            case 10:
+                ;
+            case 20:
+                break;
+            case 28:
+                if(d.getUTCMonth()!=1){
+                    my_alert();
+                }
+            case 29:
+                if(d.getUTCMonth()!=1){
+                    my_alert();
+                }
+            case 30:
+                break;
+            default :
+                my_alert();
+        }
+        function my_alert(){
+            alert("Os dias de vencimento devem ser 10, 20 ou 30\n*Exceto para o mês de fevereito");
+            document.getElementById('me_dia_vencimento').value = "";
+        }
+    });
+
+    $(".money").maskMoney(
+        {
+            showSymbol: true,
+            thousands: '',
+            decimal: '.'
+        }
+    );
+
+    /*
+    $('#form_contrato').submit(function(){
+        var money = document.getElementsByClassName('money');
+
+        for ( a in money){
+            money[a].value = money[a].value.replace(".","");
+            money[a].value = money[a].value.replace(",",".");
+            console.log(money[a].value);
+        }
+
+
+    });
+    */
     fn_a();
-    fn_b();
     fn_c();
     fn_d();
-    fn_e();
-
-    $('#data_instalacao').on('change', function() {
-        fn_f();
-    });
 
 });
 
@@ -574,7 +612,6 @@ function fn_a(){
 
     var total = 0;
 
-
     var a = [
         fp_dinheiro,
         fp_boleto,
@@ -585,19 +622,18 @@ function fn_a(){
     ];
 
     for( b in a){
-        var c = a[b].value.replace(",",".");
-        total += Number(c);
+        total += Number(a[b].value);
     }
+
     fp_total.value = total.toFixed(2);
     fn_b();
     fn_e();
-    fn_f();
 }
 function fn_b(){
     var fp_cartao_credito =  document.getElementById("fp_cartao_credito");
     var fp_parcelas_cartao =  document.getElementById("fp_parcelas_cartao");
     var valor_parcela =  document.getElementById("valor_parcela");
-    valor_parcela.value =  Number(fp_cartao_credito.value.replace(",",".")) / Number(fp_parcelas_cartao.value).toFixed(2);
+    valor_parcela.value =  (Number(fp_cartao_credito.value) / Number(fp_parcelas_cartao.value)).toFixed(2);
 }
 
 function fn_c(){
@@ -623,9 +659,11 @@ function fn_e(){
     var me_total =  document.getElementById("me_total");
     var me_parcelas =  document.getElementById("me_parcelas");
     var valor_me_parcela =  document.getElementById("valor_me_parcela");
-    valor_me_parcela.value =  Number(me_total.value.replace(",",".")) / Number(me_parcelas.value).toFixed(2);
+
+    valor_me_parcela.value =  (Number(me_total.value) / Number(me_parcelas.value)).toFixed(2);
 }
 
+/*
 function fn_f(){
     var data_instalacao =  document.getElementById("data_instalacao");
     var me_dia_vencimento =  document.getElementById("me_dia_vencimento");
@@ -748,3 +786,4 @@ function fn_f(){
     }
     me_dia_vencimento.innerHTML = z;
 }
+*/
