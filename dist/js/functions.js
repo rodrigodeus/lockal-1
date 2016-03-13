@@ -462,17 +462,25 @@ function fn_pesquisa_cliente() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var json = JSON.parse(xmlhttp.responseText);
-            var str = "<div class='list-group'>";
-            for (var i = 0; i < json.length; i++) {
-                str += "<button id='cliente_selected' type='button' class='list-group-item' data-codigo='"+json[i].codigo+"'>" + json[i].nome_razao + " - " + json[i].cpf_cnpj + "</button>";
+            if (xmlhttp.responseText) {
+                var json = JSON.parse(xmlhttp.responseText);
+                var str = "<div class='list-group'>";
+                for (var i = 0; i < json.length; i++) {
+                    str += "<button id='cliente_selected' type='button' class='list-group-item' data-codigo='" + json[i].codigo + "'>" + json[i].nome_razao + " - " + json[i].cpf_cnpj + "</button>";
+                }
+                str += "</div>";
+                $('#myModal').find('.modal-body').html(str);
+                $("#modalLoading").modal("hide");
+                $('#myModal').modal('show');
+
             }
-            str += "</div>";
+            ;
+        }else{
+            var str = "<div class='alert alert-info' role='alert'>Nenhum cliente encontrado!</div>";
             $('#myModal').find('.modal-body').html(str);
             $("#modalLoading").modal("hide");
             $('#myModal').modal('show');
-
-        };
+        }
     };
     xmlhttp.open("GET", "../backend/pesquisa_cliente.php?p=" + ipt_pesquisa_cliente.value, true);
     xmlhttp.send();

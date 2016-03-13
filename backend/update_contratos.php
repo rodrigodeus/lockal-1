@@ -7,6 +7,7 @@
  */
 
 include_once "first_all.php";
+echo "<pre>".print_r($_POST)."</pre>";
 
 if (isset($_POST) && $_POST != "") {
 
@@ -106,6 +107,10 @@ if (isset($_POST) && $_POST != "") {
             if (preg_match('/^data_valor_/', $k)) {
                 unset($dados[$k]);
             }
+        }
+
+        if(!isset($dados['contrato_validado'])){
+            $dados['contrato_validado'] = 'off';
         }
         $where = "codigo={$_POST['id']}";
         $bd->update($table, $dados, $where);

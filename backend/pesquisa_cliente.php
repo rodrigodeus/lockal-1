@@ -25,5 +25,10 @@ $where_1 = ($_SESSION['admin']=='true')?"WHERE 1=1 AND (":" WHERE cod_parceiro={
 
 $sql = "SELECT codigo,nome_razao,cpf_cnpj FROM clientes $where_1 $where )";
 $bd->query($sql);
-echo $bd->getResult('json');
+if($bd->getResult('json')){
+    echo $bd->getResult('json');
+}else{
+    echo false;
+};
+
 
