@@ -9,7 +9,7 @@
 include_once "first_all.php";
 
 $bd = new BD();
-    print_r($_GET);
+    //print_r($_GET);
     $table = "contratos";
     $dados['ativo'] =  "false";
     $dados['obs_cancelamento'] =  $_GET['obs_cancelamento'];

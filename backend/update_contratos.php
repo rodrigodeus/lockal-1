@@ -7,7 +7,7 @@
  */
 
 include_once "first_all.php";
-echo "<pre>".print_r($_POST)."</pre>";
+//echo "<pre>".print_r($_POST)."</pre>";
 
 if (isset($_POST) && $_POST != "") {
 

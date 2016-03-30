@@ -11,7 +11,7 @@ include_once "first_all.php";
 
 if(isset($_POST) && $_POST !=""){
 
-        print_r($_POST);
+        //print_r($_POST);
         $bd = new BD();
 
             $table = "parceiros";
